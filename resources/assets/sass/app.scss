@@ -1,0 +1,33 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+//@import url("//unpkg.com/element-ui@2.3.9/lib/theme-chalk/index.css");
+// Variables
+@import "variables";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+.navbar-light .navbar-brand{
+  width: 65px;
+}
+.navbar-light .navbar-brand img{
+  width: 100%;
+}
+.qty{
+  float: left;
+  width: 40%;
+  text-align: center;
+}
+.wrapper{
+  float: left;
+  display: inline-block;
+  width: 50%;
+}
+// .table th, .table td{
+//   text-align: center;
+// }
