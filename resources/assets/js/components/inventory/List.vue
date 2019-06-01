@@ -4,7 +4,7 @@
 		<div class="card-header">
 			<div class="row">
 				<div class="btn-wrapper">
-		            <router-link to="/inventory/new" class="btn btn-primary">Add Item</router-link>
+		            <router-link to="/inventory/new" class="btn btn-primary">Add Delivery</router-link>
 		            <router-link to="/inventory/consignor" class="btn btn-primary">Add Consignor</router-link>
 		        </div>
 			</div>

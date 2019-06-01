@@ -9,8 +9,8 @@
                     </div>
                     <form @submit.prevent="authenticate">
                         <div class="form-group row">
-                            <label for="email">Email:</label>
-                            <input type="email" v-model="form.email" class="form-control" placeholder="Email Address">
+                            <label for="email">Username:</label>
+                            <input type="text" v-model="form.email" class="form-control" placeholder="Username">
                         </div>
                         <div class="form-group row">
                             <label for="password">Password:</label>

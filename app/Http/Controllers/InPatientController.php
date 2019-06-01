@@ -110,14 +110,11 @@ class InPatientController extends Controller
         }
 
         //for referrence no.
-        // $count = InPatient::count();
+        do {
+           $refrence_id = mt_rand( 1000000000, 9999999999 );
+        } while ( DB::table( 'patientorderitems' )->where( 'reference_no', $refrence_id )->exists() );
 
-        // $addOrder   = Patientorderitem::groupBy('patient_order_id');
-        // $lastId     = $addOrder->count();
-
-        $addOrder = DB::table('patientorderitems')->latest('reference_no');
-        $lastId = count($addOrder);
-        $rn = 'RN' . date('ymd') . str_pad($lastId+1, 5, '00000', STR_PAD_LEFT);
+        $rn = 'RN-'. $refrence_id;
             
         //saving item order
         foreach ($item as $items) {
@@ -154,9 +151,9 @@ class InPatientController extends Controller
     }
 
     public function admissionDetails(Request $request) {
+
         $details = $request->input('details');
         $inpatient_id = $request->input('inpatient_id');
-
 
         $admision = new Inpatient_history();
             $lastId = $admision->count();
@@ -322,13 +319,22 @@ class InPatientController extends Controller
 
     public function deleteOrderItem(Request $request) {
         
-        $refNo = $request->input('ref_no');
-        $itemCode = $request->input('item_code');
+        $refNo      = $request->input('ref_no');
+        $itemCodes  = $request->input('item_code');
+        $items      = $request->input('item');
 
-        $res=Patientorderitem::where('reference_no', '=', $refNo)
-            ->where('itemcode', '=', $itemCode)
+        $res = Patientorderitem::where('reference_no', '=', $refNo)
+            ->where('itemcode', '=', $itemCodes)
             ->delete();
 
+        dd($items);
+
+        foreach ($items as $item) {
+            $inventory = Inventories::where('itemcode', $item['itemcode']);
+            $inventory->update([
+                    'stock' => $item['stock']
+                ]);
+        }
     }
 
     public function getOrderName(Request $request) {

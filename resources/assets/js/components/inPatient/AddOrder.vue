@@ -309,8 +309,8 @@
             	$('#printBtn').show()
             	$('#item_details').show()
             	$('#info').show()
-            	$('table tr td:eq(8)').show();
             	$('table th:eq(8)').show();
+            	$('table tr').find('td:eq(8)').show();
             }
 		}
 	};

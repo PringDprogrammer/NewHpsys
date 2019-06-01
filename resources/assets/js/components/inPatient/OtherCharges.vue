@@ -116,9 +116,29 @@
 		data() {
 			return {
 				other: {
-
-				}
+					rmNbrd : 0,
+					oxy : 0,
+					med_sur_sup : 0,
+					nebulizer : 0,
+					bl_chem : 0,
+					ctb : 0,
+					cbc : 0,
+					hct : 0,
+					x_ray : 0,
+					ecg : 0,
+					deliv_rm : 0,
+					other_charge : 0,
+					daily_visit : 0,
+					surg_fee : 0,
+					annes_fee : 0
+				},
+				total: 0
 			}
+		},
+		computed: {
+			OtherTotal: function() {
+                
+            },
 		}
 	};
 </script>

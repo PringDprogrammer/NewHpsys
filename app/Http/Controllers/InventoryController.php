@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\InventoryRequest;
 use App\Http\Requests\ConsignorRequest;
 use App\Consignor;
+use Carbon\Carbon;
 class InventoryController extends Controller
 {
     public function all()
@@ -26,18 +27,25 @@ class InventoryController extends Controller
         ], 200);
     }
 
-    public function new(InventoryRequest $request)
+    public function new(Request $request)
     {
-        $inventory = Inventories::create($request->only([
-            'itemcode',
-            'itemName',
-            'itemType',
-            'consignor',
-            'purchasePrice',
-            'sellPrice',
-            'stock',
-            'quantity'
-        ]));
+        $invData = $request->input('inv_data');
+        $delDate = Carbon::parse($request->input('del_date'))->format('Y-m-d');
+
+        $inventory = new Inventories();
+        $inventory->dr_no         = $invData['dr_no'];
+        $inventory->del_date      = $delDate;
+        $inventory->itemcode      = $invData['itemcode'];
+        $inventory->itemName      = $invData['itemName'];
+        $inventory->brandName     = $invData['brand'];
+        $inventory->itemType      = $invData['itemType'];
+        $inventory->consignor     = $invData['consignor'];
+        $inventory->purchasePrice = $invData['purchasePrice'];
+        $inventory->sellPrice     = $invData['sellPrice'];
+        $inventory->stock         = $invData['stock'];
+        $inventory->quantity      = $invData['quantity'];
+        $inventory->or_no         = $invData['or_no'];
+        $inventory->save();
 
         return response()->json([
             'inventory' => $inventory

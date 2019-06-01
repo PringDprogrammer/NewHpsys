@@ -64,6 +64,7 @@
         },
     	data() {
     	   return {
+                errors: null,
                 inpatient_id: '',
                 fullname: '',
                 adDetails: {

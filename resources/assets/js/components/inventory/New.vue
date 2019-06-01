@@ -4,21 +4,52 @@
         <form @submit.prevent="add">
             <table class="table">
                 <tr>
+                    <th>DR No.</th>
+                    <td>
+                        <input type="text" class="form-control" v-model="inventory.dr_no" placeholder="DR No."/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Order No.</th>
+                    <td>
+                        <input type="text" class="form-control" v-model="inventory.or_no" placeholder="Order No."/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Delivery Date</th>
+                    <td>
+                        <div>
+                            <datepicker :bootstrap-styling="true"
+                                        v-model="del_date"
+                                        format="MM-dd-yyyy"
+                                        placeholder="MM-DD-YYYY"
+                                        required
+                            ></datepicker>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
                     <th>Item Code</th>
                     <td>
-                        <input type="text" class="form-control" v-model="inventory.itemcode" placeholder="Item Code"/>
+                        <input type="text" class="form-control" v-model="inventory.itemcode" placeholder="Item Code" required />
                     </td>
                 </tr>
                 <tr>
                     <th>Item Name</th>
                     <td>
-                        <input type="text" class="form-control" v-model="inventory.itemName" placeholder="Item Name"/>
+                        <input type="text" class="form-control" v-model="inventory.itemName" placeholder="Item Name" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Brand Name</th>
+                    <td>
+                        <input type="text" class="form-control" v-model="inventory.brand" placeholder="Brand Name" />
                     </td>
                 </tr>
                 <tr>
                     <th>Item type</th>
                     <td>
-                        <select class="form-control" v-model="inventory.itemType">
+                        <select class="form-control" v-model="inventory.itemType" >
 							<option v-for="item in itemtypes">
 								{{ item }}
 							</option>
@@ -28,7 +59,7 @@
                 <tr>
                     <th>Consignor</th>
                     <td>
-                        <select class="form-control" v-model="inventory.consignor">
+                        <select class="form-control" v-model="inventory.consignor" required>
 							<option v-for="consign in selectconsignors">
 								{{ consign.alias }}
 							</option>
@@ -38,32 +69,25 @@
                 <tr>
                     <th>Purchase Price</th>
                     <td>
-                        <input type="text" class="form-control" v-model="inventory.purchasePrice" placeholder="Purchase Price"/>
+                        <input type="text" class="form-control" v-model="inventory.purchasePrice" placeholder="Purchase Price" required/>
                     </td>
                 </tr>
                 <tr>
                     <th>Selling Price</th>
                     <td>
-                        <input type="text" class="form-control" v-model="inventory.sellPrice" placeholder="Selling Price"/>
+                        <input type="text" class="form-control" v-model="inventory.sellPrice" placeholder="Selling Price" required/>
                     </td>
                 </tr>
                 <tr>
-                    <th>Stock</th>
+                    <th>Quantity</th>
                     <td>
-                        <input type="text" class="form-control" v-model="inventory.stock" placeholder="Stock"/>
+                        <input type="text" class="form-control" v-model="inventory.stock" placeholder="Quantity" required/>
                     </td>
                     <td><input type="hidden" class="form-control" v-model="inventory.quantity" value="0"></td>
                 </tr>
-
-                <!-- <tr>
-                    <th>Quantity</th>
-                    <td>
-                        <input type="text" class="form-control" v-model="inventory.quantity" placeholder="Quantity"/>
-                    </td>
-                </tr> -->
                 <tr>
                     <td>
-                        <router-link to="/inventory" class="btn">Cancel</router-link>
+                        <router-link to="/inventory" class="btn btn-danger">Cancel</router-link>
                     </td>
                     <td class="text-right">
                         <input type="submit" value="Create" class="btn btn-primary">
@@ -83,19 +107,30 @@
 
 <script>
     import validate from 'validate.js';
+    import Datepicker from 'vuejs-datepicker';
+    import moment from "moment";
+
     export default {
         name: 'new',
+        components: {
+            Datepicker,
+            moment
+        },
         data() {
             return {
+                del_date: '',
                 inventory: {
                     itemcode: '',
                     itemName: '',
+                    brand: '',
                     itemType: '',
                     consignor: '',
                     purchasePrice: '',
                     sellPrice: '',
                     stock: '',
-                    quantity: '0'
+                    quantity: '0',
+                    dr_no: '',
+                    or_no: ''
                 },
                 errors: null,
                 itemtypes: ['CS', 'GF']
@@ -114,7 +149,13 @@
         },
         methods: {
             add() {
-                axios.post('/api/inventory/new', this.$data.inventory)
+                var delDate = moment(this.del_date).format();
+                var data = {
+                    inv_data : this.inventory,
+                    del_date: delDate
+                }
+                console.log(data);
+                axios.post('/api/inventory/new', data)
                     .then((response) => {
                         this.$router.push('/inventory');
                     });

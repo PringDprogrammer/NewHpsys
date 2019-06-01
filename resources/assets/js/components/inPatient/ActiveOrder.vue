@@ -1,7 +1,7 @@
 <template>
-	<div class="form-group">
+	<div class="form-group" id="mainDiv">
 		<div class="form-group">
-			<h2 class="text-center"><strong>Order Detail(s)</strong></h2>
+			<h2 class="text-center" id="order"><strong>Order Detail(s)</strong></h2>
 		</div>
 		<div class="form-group">
 			<div class="row">
@@ -29,9 +29,9 @@
 				</div>
 			</div><br>
 		</div>
-		<div class="scrollable overflow-auto">
+		<div class="scrollable overflow-auto" id="divTable">
 			<h3 align="center"><strong>Order Table</strong></h3>
-			<table class="table table-striped"> 
+			<table class="table table-striped" id="orderTable"> 
 				<thead>
 					<th>OR No.</th>
 					<th>PatientID</th>
@@ -67,15 +67,15 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="form-group row ">
+		<div class="form-group row " id="disc">
 			<label class="col-sm-2 col-form-label">Discount Type: </label>
-			<div class="col-md-3">
+			<div class="col-sm-3">
 				<input type="text" class="form-control" v-model="order.discount" disabled>
 			</div>
 		</div>
-		<div class="form-group row ">
+		<div class="form-group row " id="afterbreak">
 			<label class="col-sm-2 col-form-label">Discount Ref. No.: </label>
-			<div class="col-md-3">
+			<div class="col-sm-3">
 				<input type="text" class="form-control" v-model="order.disc_ref" disabled>
 			</div>
 		</div><br>
@@ -155,8 +155,18 @@
             </table>
         </div>
         <div align="center">
-	    	<input type="submit" @click="updateOrder" value="Submit" class="btn btn-primary col-sm-3">
+        	<div clas="form-group">
+					<input type="button" id="printBtn" class="btn btn-secondary col-sm-3" @click.prevent="print()" value="Print">
+			</div><br>
+	    	<input type="submit" id="submitBtn" @click="updateOrder" value="Submit" class="btn btn-primary col-sm-3">
 	    </div>
+	    <div class="errors" v-if="errors">
+            <ul>
+                <li v-for="(fieldsError, fieldName) in errors" :key="fieldName">
+                    <strong>{{ fieldName }}</strong> {{ fieldsError.join('\n') }}
+                </li>
+            </ul>
+        </div>
 	</div>
 </template>
 
@@ -206,6 +216,7 @@
 	    			others_ref: '',
 	    			others_desc: ''
 	    		},
+	    		errors: null,
 	    		patientOrderItem: [],
 	    		discounts: [
 	    			{
@@ -288,8 +299,8 @@
             removeItem(index) {
             	var ref_no = this.patientOrderItem[index].reference_no;
             	var item_code = this.patientOrderItem[index].itemcode;
-
-                axios.delete('/api/inPatient/deleteOrderItem', {params: {ref_no, item_code}})
+            	var item = this.patientOrderItem[index];
+                axios.delete('/api/inPatient/deleteOrderItem', {params: {ref_no, item_code, item}})
                 	.then((response) => {
                 		this.patientOrderItem.splice(index, 1);
                 		console.log('Item Deleted');
@@ -318,6 +329,18 @@
             		.catch((error) => {
             			alert(error);
             		})
+            },
+            print: function() {
+            	$('#submitBtn').hide()
+            	$('#printBtn').hide()
+            	$('table th:eq(10)').hide();
+            	$('table tr').find('td:eq(10)').hide();
+            	window.print();
+            	window.close();
+            	$('#submitBtn').show()
+            	$('#printBtn').show()
+            	$('table th:eq(10)').show();
+            	$('table tr').find('td:eq(10)').show();
             }
 
     	}
@@ -335,4 +358,41 @@
 	.scrollable th { position: sticky; top: 0; }
 	.scrollable th { background: #006400; color: white; }
 	.scrollable th { text-align: center; }
+	@media print {
+		.scrollable {
+			height: 100%;
+		}
+		@page { 
+			size: auto;
+			margin: 0mm; 
+		}
+		@page {
+			margin-top: 20px;
+		}
+	    input[type=text] {
+	        display: inline-block;
+	        border:none;
+	        border-bottom: 1px solid #000000;
+    	}
+		#info {
+			display: none;
+		}
+		#mainDiv {
+			display: inline ;
+		}
+		#disc {
+			margin-top: 50px;
+		}
+		#afterbreak {
+			page-break-after: always;
+		}
+		.scrollable table { page-break-after:auto }
+		.scrollable tr { page-break-inside:avoid; page-break-after:auto }
+		.scrollable td { page-break-inside:avoid; page-break-after:auto }
+		.scrollable th { color: #000000}
+		#orderTable {
+			height: auto;
+		}
+
+	}
 </style>

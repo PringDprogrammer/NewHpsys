@@ -10,8 +10,8 @@
                             <input type="text" v-model="form.name" class="form-control" placeholder="Name" required>
                         </div>
                         <div class="form-group row">
-                            <label for="email">Email:</label>
-                            <input type="email" v-model="form.email" class="form-control" placeholder="example@gmail.com" required>
+                            <label for="email">Username:</label>
+                            <input type="text" v-model="form.email" class="form-control" placeholder="Username" required>
                         </div>
                         <div class="form-group row">
                             <label for="password">Password:</label>
