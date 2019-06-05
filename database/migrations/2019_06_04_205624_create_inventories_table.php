@@ -25,7 +25,6 @@ class CreateInventoriesTable extends Migration
             $table->string('consignor');
             $table->double('purchasePrice', 10, 2);
             $table->double('sellPrice', 10, 2);
-            //$table->integer('quantity');
             $table->integer('stock');
             $table->integer('quantity')->nullable();
             $table->timestamps();

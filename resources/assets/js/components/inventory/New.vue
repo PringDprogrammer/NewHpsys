@@ -83,7 +83,8 @@
                     <td>
                         <input type="text" class="form-control" v-model="inventory.stock" placeholder="Quantity" required/>
                     </td>
-                    <td><input type="hidden" class="form-control" v-model="inventory.quantity" value="0"></td>
+                    <td><input type="hidden" class="form-control" v-model="inventory.quantity" value="0">
+                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -119,6 +120,7 @@
         data() {
             return {
                 del_date: '',
+                begin_stock: '',
                 inventory: {
                     itemcode: '',
                     itemName: '',

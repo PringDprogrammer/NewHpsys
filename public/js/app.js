@@ -78554,6 +78554,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -78568,6 +78569,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             del_date: '',
+            begin_stock: '',
             inventory: {
                 itemcode: '',
                 itemName: '',
@@ -86055,6 +86057,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -86078,6 +86081,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             _this.order.discount = response.data.patientOrderItem[0].disc_type;
             _this.order.disc_ref = response.data.patientOrderItem[0].disc_ref;
             _this.patientOrderItem = response.data.patientOrderItem;
+            _this.itemstock = response.data.patientOrderItem[0].stock;
         });
     },
     data: function data() {
@@ -86113,6 +86117,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 name: 'SC',
                 value: '0.20'
             }],
+            itemstock: '',
             totalPrice: 0,
             disc_total: 0,
             sumtotal: 0,
@@ -86186,8 +86191,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var ref_no = this.patientOrderItem[index].reference_no;
             var item_code = this.patientOrderItem[index].itemcode;
-            var item = this.patientOrderItem[index];
-            axios.delete('/api/inPatient/deleteOrderItem', { params: { ref_no: ref_no, item_code: item_code, item: item } }).then(function (response) {
+            var itemQty = this.patientOrderItem[index].quantity;
+            var item_stock = this.itemstock;
+
+            axios.delete('/api/inPatient/deleteOrderItem', { params: { ref_no: ref_no, item_code: item_code, itemQty: itemQty, item_stock: item_stock } }).then(function (response) {
                 _this2.patientOrderItem.splice(index, 1);
                 console.log('Item Deleted');
                 //this.$toaster.success('Item Deleted', {timeout: 5000});
@@ -86373,6 +86380,28 @@ var render = function() {
       ]),
       _c("br")
     ]),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.itemstock,
+          expression: "itemstock"
+        }
+      ],
+      staticClass: "form-control",
+      attrs: { type: "hidden" },
+      domProps: { value: _vm.itemstock },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.itemstock = $event.target.value
+        }
+      }
+    }),
     _vm._v(" "),
     _c(
       "div",

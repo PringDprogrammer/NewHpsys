@@ -29,6 +29,7 @@
 				</div>
 			</div><br>
 		</div>
+		<input type="hidden" class="form-control" v-model="itemstock">
 		<div class="scrollable overflow-auto" id="divTable">
 			<h3 align="center"><strong>Order Table</strong></h3>
 			<table class="table table-striped" id="orderTable"> 
@@ -192,6 +193,7 @@
                     this.order.discount = response.data.patientOrderItem[0].disc_type;
 					this.order.disc_ref = response.data.patientOrderItem[0].disc_ref;
   					this.patientOrderItem = response.data.patientOrderItem;
+  					this.itemstock = response.data.patientOrderItem[0].stock;
                 });
 
         },
@@ -232,6 +234,7 @@
 	    				value: '0.20'
 	    			}
 	    		],
+	    		itemstock: '',
 	    		totalPrice: 0,
 	    		disc_total: 0,
 	    		sumtotal: 0,
@@ -297,10 +300,12 @@
             },
             //pag delete ng item order sa order table
             removeItem(index) {
-            	var ref_no = this.patientOrderItem[index].reference_no;
-            	var item_code = this.patientOrderItem[index].itemcode;
-            	var item = this.patientOrderItem[index];
-                axios.delete('/api/inPatient/deleteOrderItem', {params: {ref_no, item_code, item}})
+            	var ref_no 		= this.patientOrderItem[index].reference_no;
+            	var item_code 	= this.patientOrderItem[index].itemcode;
+            	var itemQty 	= this.patientOrderItem[index].quantity;
+            	var item_stock 	= this.itemstock;
+
+                axios.delete('/api/inPatient/deleteOrderItem', {params: {ref_no, item_code, itemQty, item_stock}})
                 	.then((response) => {
                 		this.patientOrderItem.splice(index, 1);
                 		console.log('Item Deleted');

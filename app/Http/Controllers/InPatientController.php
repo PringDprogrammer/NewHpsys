@@ -321,20 +321,23 @@ class InPatientController extends Controller
         
         $refNo      = $request->input('ref_no');
         $itemCodes  = $request->input('item_code');
-        $items      = $request->input('item');
-
+        $itemQty    = $request->input('itemQty');
+        $itemstock  = $request->input('item_stock');
+        $newStock   = $itemQty + $itemstock;
+        
         $res = Patientorderitem::where('reference_no', '=', $refNo)
             ->where('itemcode', '=', $itemCodes)
             ->delete();
 
-        dd($items);
+        $newStocks = Inventories::where('itemcode', '=', $itemCodes);
+        $newStocks->update([
+            'stock' => $newStock
+        ]);
+        dd($newStocks);
 
-        foreach ($items as $item) {
-            $inventory = Inventories::where('itemcode', $item['itemcode']);
-            $inventory->update([
-                    'stock' => $item['stock']
-                ]);
-        }
+        return response()->json([
+            'invStock' => $inventory
+        ]);
     }
 
     public function getOrderName(Request $request) {
