@@ -10,9 +10,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>Order No.</th>
+                    <th>Consignment Order No.</th>
                     <td>
-                        <input type="text" class="form-control" v-model="inventory.or_no" placeholder="Order No."/>
+                        <input type="text" class="form-control" v-model="inventory.or_no" placeholder="Consignment Order No."/>
                     </td>
                 </tr>
                 <tr>
@@ -120,7 +120,6 @@
         data() {
             return {
                 del_date: '',
-                begin_stock: '',
                 inventory: {
                     itemcode: '',
                     itemName: '',

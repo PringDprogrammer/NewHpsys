@@ -78569,7 +78569,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             del_date: '',
-            begin_stock: '',
             inventory: {
                 itemcode: '',
                 itemName: '',
@@ -78666,7 +78665,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("tr", [
-            _c("th", [_vm._v("Order No.")]),
+            _c("th", [_vm._v("Consignment Order No.")]),
             _vm._v(" "),
             _c("td", [
               _c("input", {
@@ -78679,7 +78678,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Order No." },
+                attrs: { type: "text", placeholder: "Consignment Order No." },
                 domProps: { value: _vm.inventory.or_no },
                 on: {
                   input: function($event) {
