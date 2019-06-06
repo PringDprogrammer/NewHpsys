@@ -14,7 +14,7 @@
 		    </div>
 		</div>
 		<div class="card-body">
-			<table class="table">
+			<table class="table" style="text-align: center;">
 				<thead>
 					<th>Item Code</th>
 					<th>Item Name</th>

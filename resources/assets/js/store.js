@@ -20,6 +20,7 @@ export default {
         inpatientsReport: [],
         doctor: [],
         tableDoctors: [],
+        //invItem: []
     },
     getters: {
         isLoading(state) {
@@ -52,6 +53,9 @@ export default {
         patientOrder(state) {
             return state.patientOrder;
         },
+        // invItem(state) {
+        //     return state.invItem;
+        // },
         doctor(state) {
             return state.doctor;
         },
@@ -105,6 +109,9 @@ export default {
         patientOrders(state, payload) {
             state.patientOrder = payload;
         },
+        // invItems(state, payload) {
+        //     state.invItem = payload;
+        // },
         selectconsignors(state, payload) {
             state.consignor = payload;
         },
@@ -183,6 +190,12 @@ export default {
                     context.commit('patientOrders', response.data.patientOrder);
             });
         },
+        // getItemInventory(context) {
+        //     axios.get('/api/inventory/itemPick')
+        //         .then((response)=> {
+        //             context.commit('invItems', response.data.invItem);
+        //     });
+        // },
         getDoctor(context) {
             axios.get('/api/inPatient/pickDoctor')
                 .then((response)=> {

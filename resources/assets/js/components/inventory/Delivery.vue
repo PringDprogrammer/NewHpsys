@@ -1,6 +1,6 @@
 <template>
     <div class="inventory-new">
-        <form @submit.prevent="add">
+        <form @submit.prevent="">
             <div class="form-group">    
                 <div class="row">
                     <div class="col-sm-6">
@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-sm-6">
                     <label>Consignor</label>
-                        <select class="form-control" v-model="inventory.consignor" required>
+                        <select class="form-control" v-model="inventory.consignor" @change="ItemGenerate" required>
                             <option v-for="consign in selectconsignors">
                                 {{ consign.alias }}
                             </option>
@@ -40,15 +40,85 @@
             </div>
             <div class="form-group">
                 <label>Item List</label>
-                <select class="form-control" v-model="inventory.item" required>
-                    <option v-for="item in items">
-                        {{ consign.alias }}
-                    </option>
-                </select>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <select class="form-control" v-model="inventory.item" @change="itemPick($event)" required>
+                            <option v-for="select in invItems">
+                                {{ select.itemcode }} - {{select.brandName}} {{select.itemName}} ({{select.itemType}})
+                            </option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary col-sm-2" @click="addItemClick">Add Item </button>
+                </div>
             </div>
+
+            <h3 id="order">Item Table</h3>
+            <table class="table" id="table_order" style="text-align: center;">
+                <thead>
+                    <th>Item Code</th>
+                    <th>Item Name</th>
+                    <th>Item Type</th>
+                    <th>Brand Name</th>
+                    <th>Quantity</th>
+                    <th>Purchase Price</th>
+                    <th>Sell Price</th>
+                    <th>Unit</th>
+                    <th>Unit Cost</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    <template v-if="!selectedItem.length">
+                            <tr>
+                                <td colspan="12" class="text-center">No records found in the database</td>
+                            </tr>
+                    </template>
+                    <template>
+                        <tr v-for="(item , k) in selectedItem" :key="k">
+                            <td>{{ item.itemcode }}</td>
+                            <td>{{ item.itemName }}</td>
+                            <td>{{ item.itemType }}</td>
+                            <td>{{ item.brandName }}</td>
+                            <td>
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control" v-model="itemDel.quantity">
+                                    <input type="hidden" class="form-control" value="0" v-model="itemDel.quantity2">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control" v-model="itemDel.purchPrice">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control" v-model="itemDel.sellPrice">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control" v-model="itemDel.unit">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control" v-model="itemDel.cost">
+                                </div>
+                            </td>
+                            <td>
+                                {{ formatPrice(itemTotal) }}
+                            </td>
+                            <td>
+                                <button class="btn" type="button" name="button" @click="removeItem(k, item)">X</button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+
             <div align="center">
                 <div clas="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary col-sm-3">
+                    <input type="submit" value="Create" class="btn btn-primary col-sm-3" @click="addDeliver">
                 </div><br>
                 <div class="form-group">
                     <router-link to="/inventory" class="btn btn-danger col-sm-3">Cancel</router-link>
@@ -84,6 +154,19 @@
                     or_no: '',
                     item: ''
                 },
+                itemDel: {
+                    quantity: '',
+                    quantity1: '',
+                    unit: '',
+                    cost: '',
+                    sellPrice: '',
+                    purchPrice: '',
+                },
+                rowTotal: '',
+                invItems: [],
+                deliveryItem: [],
+                selectedItem: [],
+                item_total: [],
                 errors: null,
             };
         },
@@ -96,20 +179,64 @@
             },
             selectconsignors() {
                 return this.$store.getters.consignor;
+            },
+            itemTotal() {
+                var qty = this.itemDel.quantity;
+                var cost = this.itemDel.cost;
+                return this.item_total = qty * cost ;
             }
         },
         methods: {
-            add() {
+            //pag delete ng item order sa order table
+            removeItem(index) {
+                this.selectedItem.splice(index, 1);
+            },
+            //format number to 2 decimal places
+            formatPrice(value) {
+                let val = (value/1).toFixed(2).replace('.', ',')
+                return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+            },
+            ItemGenerate() {
+                var consign = {
+                  consignor: this.inventory.consignor
+                } 
+
+                axios.post('/api/inventory/itemChange', consign)
+                    .then((response) => {
+                        this.invItems = response.data.invItem;
+                    });
+            },
+            //pag generate ng napiling item
+            itemPick(event) {
+                let itemcode = event.target.value.split('-')[0];
+
+                axios.post('/api/inventory/itemPick/'+itemcode)
+                   .then((response) => {
+                     this.deliveryItem = response.data.item;
+                   });
+            },
+            //pag add ng item sa item table
+            addItemClick() {
+                this.selectedItem.push(this.deliveryItem);
+                 this.selectedItem.forEach((itemDel) => {
+                   this.rowTotal = itemDel.quantity;
+                });
+            },
+            addDeliver() {
                 var delDate = moment(this.del_date).format();
                 var data = {
                     inv_data : this.inventory,
+                    itemDel: this.itemDel,
+                    others: {
+                        item_total: this.item_total
+                    },
                     del_date: delDate
                 }
                 console.log(data);
-                axios.post('/api/inventory/new', data)
-                    .then((response) => {
-                        this.$router.push('/inventory');
-                    });
+                // axios.post('/api/inventory/new', data)
+                //     .then((response) => {
+                //         this.$router.push('/inventory');
+                //     });
             }
         }
     };

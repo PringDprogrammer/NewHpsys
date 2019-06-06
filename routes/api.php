@@ -34,8 +34,11 @@ Route::group(['middleware' => 'jwt.auth'], function ($router) {
     Route::post('inventory/consignor', 'InventoryController@addConsignor');
     Route::delete('inventory/delete/{itemcode}', 'InventoryController@delete');
     Route::get('inventory/pickconsignor', 'InventoryController@pickConsignor');
+
+    Route::post('inventory/itemPick/{itemcode}', 'InventoryController@itemPick');
+
+    Route::post('inventory/itemChange', 'InventoryController@itemChange');
     Route::get('inventory/{itemcode}', 'InventoryController@get');
-    Route::get('inventory/getStock', 'InventoryController@getStock');
     
     //walkin Routing using Controller
     Route::get('pharmacy', 'WalkinController@all');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Inventories;
 use App\ItemList;
+use App\InventoryAdditem;
 use Illuminate\Http\Request;
 use App\Http\Requests\InventoryRequest;
 use App\Http\Requests\ConsignorRequest;
@@ -19,6 +20,29 @@ class InventoryController extends Controller
         return response()->json([
             'inventory' => $inventories
         ], 200);
+    }
+    
+    public function itemPick($itemcode) 
+    {
+        $item = ItemList::where('itemcode', $itemcode)->first();
+
+        return response()->json([
+            'item' => $item
+        ]);
+    }
+
+    public function itemChange(Request $request) 
+    {
+        $consigns = $request->input('consignor');
+        
+        $delItem = DB::table('itemlists')
+            ->select('itemcode', 'itemName', 'itemType', 'brandName')
+            ->where('consignor', '=', $consigns)
+            ->get();
+
+        return response()->json([
+            'invItem' => $delItem
+        ]);
     }
 
     public function get($itemcode)
