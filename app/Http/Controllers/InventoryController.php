@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Inventories;
+use App\ItemList;
 use Illuminate\Http\Request;
 use App\Http\Requests\InventoryRequest;
 use App\Http\Requests\ConsignorRequest;
@@ -13,7 +14,7 @@ class InventoryController extends Controller
 {
     public function all()
     {
-        $inventories = Inventories::all();
+        $inventories = ItemList::all();
 
         return response()->json([
             'inventory' => $inventories
@@ -32,62 +33,17 @@ class InventoryController extends Controller
     public function new(Request $request)
     {
         $invData = $request->input('inv_data');
-        $delDate = Carbon::parse($request->input('del_date'))->format('Y-m-d');
+        $inventory = new ItemList();
+        $inventory->itemcode      = $invData['itemcode'];
+        $inventory->itemName      = $invData['itemName'];
+        $inventory->brandName     = $invData['brand'];
+        $inventory->itemType      = $invData['itemType'];
+        $inventory->consignor     = $invData['consignor'];
+        $inventory->purchasePrice = $invData['purchasePrice'];
+        $inventory->sellPrice     = $invData['sellPrice'];
+        $inventory->save();
 
-        $inventory = Inventories::updateOrCreate(
-
-            ['itemcode'     => $invData['itemcode']],
-            ['dr_no'        => $invData['dr_no'],
-            'or_no'         => $invData['or_no'],
-            'del_date'      => $delDate,
-            'itemName'      => $invData['itemName'],
-            'brandName'     => $invData['brand'],
-            'itemType'      => $invData['itemType'],
-            'consignor'     => $invData['consignor'],
-            'purchasePrice' => $invData['purchasePrice'],
-            'sellPrice'     => $invData['sellPrice'],
-            'stock'         => $invData['stock'],
-            'quantity'      => $invData['quantity'],
-            'or_no'         => $invData['or_no']
-        ]);
-
-
-        // if($invData['itemcode'] > 0){
-        //     $inventory = Inventories::where('itemcode', $invData['itemcode']);
-        //     $inventory->update([
-        //         'dr_no'         => $invData['dr_no'],
-        //         'or_no'         => $invData['or_no'],
-        //         'del_date'      => $delDate,
-        //         'itemcode'      => $invData['itemcode'],
-        //         'itemName'      => $invData['itemName'],
-        //         'brandName'     => $invData['brand'],
-        //         'itemType'      => $invData['itemType'],
-        //         'consignor'     => $invData['consignor'],
-        //         'purchasePrice' => $invData['purchasePrice'],
-        //         'sellPrice'     => $invData['sellPrice'],
-        //         'stock'         => $invData['stock'],
-        //         'quantity'      => $invData['quantity'],
-        //         'or_no'         => $invData['or_no']
-        //     ]);
-
-        // } else {
-        //     $inventory = new Inventories();
-        //     $inventory->dr_no         = $invData['dr_no'];
-        //     $inventory->or_no         = $invData['or_no'];
-        //     $inventory->del_date      = $delDate;
-        //     $inventory->itemcode      = $invData['itemcode'];
-        //     $inventory->itemName      = $invData['itemName'];
-        //     $inventory->brandName     = $invData['brand'];
-        //     $inventory->itemType      = $invData['itemType'];
-        //     $inventory->consignor     = $invData['consignor'];
-        //     $inventory->purchasePrice = $invData['purchasePrice'];
-        //     $inventory->sellPrice     = $invData['sellPrice'];
-        //     $inventory->stock         = $invData['stock'];
-        //     $inventory->quantity      = $invData['quantity'];
-        //     $inventory->or_no         = $invData['or_no'];
-        //     $inventory->save();
-        // }
-
+        
         return response()->json([
             'inventory' => $inventory
         ], 200);

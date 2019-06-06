@@ -72807,40 +72807,43 @@ var index_esm = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_inventory_Main_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_inventory_Main_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_inventory_Consignor_vue__ = __webpack_require__(249);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_inventory_Consignor_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_inventory_Consignor_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_pharmacy_Main_vue__ = __webpack_require__(252);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_pharmacy_Main_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_pharmacy_Main_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_pharmacy_List_vue__ = __webpack_require__(255);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_pharmacy_List_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_pharmacy_List_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_pharmacy_New_vue__ = __webpack_require__(148);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_pharmacy_New_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_pharmacy_New_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_pharmacy_View_vue__ = __webpack_require__(264);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_pharmacy_View_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__components_pharmacy_View_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_inPatient_Main_vue__ = __webpack_require__(269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_inPatient_Main_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__components_inPatient_Main_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_inPatient_List_vue__ = __webpack_require__(149);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_inPatient_List_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19__components_inPatient_List_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_inPatient_New_vue__ = __webpack_require__(276);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_inPatient_New_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20__components_inPatient_New_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_inPatient_AddDoctor_vue__ = __webpack_require__(281);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_inPatient_AddDoctor_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21__components_inPatient_AddDoctor_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_inPatient_Admission_vue__ = __webpack_require__(284);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_inPatient_Admission_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_22__components_inPatient_Admission_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_inPatient_UpdatePatient_vue__ = __webpack_require__(287);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_inPatient_UpdatePatient_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23__components_inPatient_UpdatePatient_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_inPatient_PersonalDetails_vue__ = __webpack_require__(292);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_inPatient_PersonalDetails_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_24__components_inPatient_PersonalDetails_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_inPatient_CurrentRecord_vue__ = __webpack_require__(295);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_inPatient_CurrentRecord_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_25__components_inPatient_CurrentRecord_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_inPatient_ActiveOrder_vue__ = __webpack_require__(298);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_inPatient_ActiveOrder_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_26__components_inPatient_ActiveOrder_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_inPatient_OtherCharges_vue__ = __webpack_require__(304);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_inPatient_OtherCharges_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_27__components_inPatient_OtherCharges_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_inPatient_PatientHistory_vue__ = __webpack_require__(307);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_inPatient_PatientHistory_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_28__components_inPatient_PatientHistory_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_inPatient_OutPatient_vue__ = __webpack_require__(309);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_inPatient_OutPatient_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_29__components_inPatient_OutPatient_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_inPatient_AddOrder_vue__ = __webpack_require__(311);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_inPatient_AddOrder_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_30__components_inPatient_AddOrder_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_inventory_Delivery_vue__ = __webpack_require__(329);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_inventory_Delivery_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_inventory_Delivery_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_pharmacy_Main_vue__ = __webpack_require__(252);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_pharmacy_Main_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_pharmacy_Main_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_pharmacy_List_vue__ = __webpack_require__(255);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_pharmacy_List_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_pharmacy_List_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_pharmacy_New_vue__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_pharmacy_New_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__components_pharmacy_New_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_pharmacy_View_vue__ = __webpack_require__(264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_pharmacy_View_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__components_pharmacy_View_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_inPatient_Main_vue__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_inPatient_Main_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19__components_inPatient_Main_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_inPatient_List_vue__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_inPatient_List_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20__components_inPatient_List_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_inPatient_New_vue__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_inPatient_New_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21__components_inPatient_New_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_inPatient_AddDoctor_vue__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_inPatient_AddDoctor_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_22__components_inPatient_AddDoctor_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_inPatient_Admission_vue__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_inPatient_Admission_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23__components_inPatient_Admission_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_inPatient_UpdatePatient_vue__ = __webpack_require__(287);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_inPatient_UpdatePatient_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_24__components_inPatient_UpdatePatient_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_inPatient_PersonalDetails_vue__ = __webpack_require__(292);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_inPatient_PersonalDetails_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_25__components_inPatient_PersonalDetails_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_inPatient_CurrentRecord_vue__ = __webpack_require__(295);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_inPatient_CurrentRecord_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_26__components_inPatient_CurrentRecord_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_inPatient_ActiveOrder_vue__ = __webpack_require__(298);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_inPatient_ActiveOrder_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_27__components_inPatient_ActiveOrder_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_inPatient_OtherCharges_vue__ = __webpack_require__(304);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_inPatient_OtherCharges_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_28__components_inPatient_OtherCharges_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_inPatient_PatientHistory_vue__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_inPatient_PatientHistory_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_29__components_inPatient_PatientHistory_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_inPatient_OutPatient_vue__ = __webpack_require__(309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_inPatient_OutPatient_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_30__components_inPatient_OutPatient_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_inPatient_AddOrder_vue__ = __webpack_require__(311);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_inPatient_AddOrder_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_31__components_inPatient_AddOrder_vue__);
+
 
 
 
@@ -72911,80 +72914,83 @@ var routes = [{
         path: 'consignor',
         component: __WEBPACK_IMPORTED_MODULE_13__components_inventory_Consignor_vue___default.a
     }, {
+        path: 'delivery',
+        component: __WEBPACK_IMPORTED_MODULE_14__components_inventory_Delivery_vue___default.a
+    }, {
         path: ':itemcode',
         component: __WEBPACK_IMPORTED_MODULE_11__components_inventory_View_vue___default.a
     }]
 }, {
     path: '/pharmacy',
-    component: __WEBPACK_IMPORTED_MODULE_14__components_pharmacy_Main_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_15__components_pharmacy_Main_vue___default.a,
     meta: {
         requiresAuth: true
     },
     children: [{
         path: '/',
-        component: __WEBPACK_IMPORTED_MODULE_15__components_pharmacy_List_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_16__components_pharmacy_List_vue___default.a
     }, {
         path: 'new',
-        component: __WEBPACK_IMPORTED_MODULE_16__components_pharmacy_New_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_17__components_pharmacy_New_vue___default.a
     }, {
         path: ':id',
-        component: __WEBPACK_IMPORTED_MODULE_17__components_pharmacy_View_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_18__components_pharmacy_View_vue___default.a
     }, {
         path: 'newOrder',
-        component: __WEBPACK_IMPORTED_MODULE_16__components_pharmacy_New_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_17__components_pharmacy_New_vue___default.a
     }]
 }, {
     path: '/inPatient',
-    component: __WEBPACK_IMPORTED_MODULE_18__components_inPatient_Main_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_19__components_inPatient_Main_vue___default.a,
     meta: {
         requiresAuth: true
     },
     children: [{
         path: '/',
-        component: __WEBPACK_IMPORTED_MODULE_19__components_inPatient_List_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_20__components_inPatient_List_vue___default.a
     }, {
         path: 'new',
-        component: __WEBPACK_IMPORTED_MODULE_20__components_inPatient_New_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_21__components_inPatient_New_vue___default.a
     }, {
         path: 'newdoctor',
-        component: __WEBPACK_IMPORTED_MODULE_21__components_inPatient_AddDoctor_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_22__components_inPatient_AddDoctor_vue___default.a
     }, {
         path: 'admission',
-        component: __WEBPACK_IMPORTED_MODULE_22__components_inPatient_Admission_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_23__components_inPatient_Admission_vue___default.a
     }, {
         path: 'newOrder',
-        component: __WEBPACK_IMPORTED_MODULE_19__components_inPatient_List_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_20__components_inPatient_List_vue___default.a
     }, {
         path: ':inpatient_id',
-        component: __WEBPACK_IMPORTED_MODULE_23__components_inPatient_UpdatePatient_vue___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_24__components_inPatient_UpdatePatient_vue___default.a,
         children: [{
             path: 'personal',
             name: 'personal-details',
-            component: __WEBPACK_IMPORTED_MODULE_24__components_inPatient_PersonalDetails_vue___default.a
+            component: __WEBPACK_IMPORTED_MODULE_25__components_inPatient_PersonalDetails_vue___default.a
         }, {
             path: 'current',
             name: 'current-record',
-            component: __WEBPACK_IMPORTED_MODULE_25__components_inPatient_CurrentRecord_vue___default.a
+            component: __WEBPACK_IMPORTED_MODULE_26__components_inPatient_CurrentRecord_vue___default.a
         }, {
             path: 'order',
             name: 'active-order',
-            component: __WEBPACK_IMPORTED_MODULE_26__components_inPatient_ActiveOrder_vue___default.a
+            component: __WEBPACK_IMPORTED_MODULE_27__components_inPatient_ActiveOrder_vue___default.a
         }, {
             path: 'addOrder',
             name: 'add-order',
-            component: __WEBPACK_IMPORTED_MODULE_30__components_inPatient_AddOrder_vue___default.a
+            component: __WEBPACK_IMPORTED_MODULE_31__components_inPatient_AddOrder_vue___default.a
         }, {
             path: 'other',
             name: 'other-charges',
-            component: __WEBPACK_IMPORTED_MODULE_27__components_inPatient_OtherCharges_vue___default.a
+            component: __WEBPACK_IMPORTED_MODULE_28__components_inPatient_OtherCharges_vue___default.a
         }, {
             path: 'history',
             name: 'patient-history',
-            component: __WEBPACK_IMPORTED_MODULE_28__components_inPatient_PatientHistory_vue___default.a
+            component: __WEBPACK_IMPORTED_MODULE_29__components_inPatient_PatientHistory_vue___default.a
         }, {
             path: 'out-patient-history',
             name: 'out-patient-history',
-            component: __WEBPACK_IMPORTED_MODULE_29__components_inPatient_OutPatient_vue___default.a
+            component: __WEBPACK_IMPORTED_MODULE_30__components_inPatient_OutPatient_vue___default.a
         }]
     }]
 }, {
@@ -78152,6 +78158,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'inventory',
@@ -78210,6 +78217,15 @@ var render = function() {
                 {
                   staticClass: "btn btn-primary",
                   attrs: { to: "/inventory/new" }
+                },
+                [_vm._v("Add Item")]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { to: "/inventory/delivery" }
                 },
                 [_vm._v("Add Delivery")]
               ),
@@ -78444,9 +78460,6 @@ exports.push([module.i, "\n.errors {\r\n    background: lightcoral;\r\n    borde
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validate_js__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validate_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_validate_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_datepicker__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
 //
 //
 //
@@ -78522,53 +78535,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'new',
-    components: {
-        Datepicker: __WEBPACK_IMPORTED_MODULE_1_vuejs_datepicker__["a" /* default */],
-        moment: __WEBPACK_IMPORTED_MODULE_2_moment___default.a
-    },
     data: function data() {
         return {
-            del_date: '',
             inventory: {
                 itemcode: '',
                 itemName: '',
@@ -78576,11 +78549,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 itemType: '',
                 consignor: '',
                 purchasePrice: '',
-                sellPrice: '',
-                stock: '',
-                quantity: '0',
-                dr_no: '',
-                or_no: ''
+                sellPrice: ''
             },
             errors: null,
             itemtypes: ['CS', 'GF']
@@ -78602,12 +78571,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         add: function add() {
             var _this = this;
 
-            var delDate = __WEBPACK_IMPORTED_MODULE_2_moment___default()(this.del_date).format();
             var data = {
-                inv_data: this.inventory,
-                del_date: delDate
+                inv_data: this.inventory
             };
-            console.log(data);
+
             axios.post('/api/inventory/new', data).then(function (response) {
                 _this.$router.push('/inventory');
             });
@@ -78636,90 +78603,6 @@ var render = function() {
       },
       [
         _c("table", { staticClass: "table" }, [
-          _c("tr", [
-            _c("th", [_vm._v("DR No.")]),
-            _vm._v(" "),
-            _c("td", [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.inventory.dr_no,
-                    expression: "inventory.dr_no"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "DR No." },
-                domProps: { value: _vm.inventory.dr_no },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.inventory, "dr_no", $event.target.value)
-                  }
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("th", [_vm._v("Consignment Order No.")]),
-            _vm._v(" "),
-            _c("td", [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.inventory.or_no,
-                    expression: "inventory.or_no"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Consignment Order No." },
-                domProps: { value: _vm.inventory.or_no },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.inventory, "or_no", $event.target.value)
-                  }
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("th", [_vm._v("Delivery Date")]),
-            _vm._v(" "),
-            _c("td", [
-              _c(
-                "div",
-                [
-                  _c("datepicker", {
-                    attrs: {
-                      "bootstrap-styling": true,
-                      format: "MM-dd-yyyy",
-                      placeholder: "MM-DD-YYYY",
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.del_date,
-                      callback: function($$v) {
-                        _vm.del_date = $$v
-                      },
-                      expression: "del_date"
-                    }
-                  })
-                ],
-                1
-              )
-            ])
-          ]),
-          _vm._v(" "),
           _c("tr", [
             _c("th", [_vm._v("Item Code")]),
             _vm._v(" "),
@@ -78972,58 +78855,6 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("tr", [
-            _c("th", [_vm._v("Quantity")]),
-            _vm._v(" "),
-            _c("td", [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.inventory.stock,
-                    expression: "inventory.stock"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Quantity", required: "" },
-                domProps: { value: _vm.inventory.stock },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.inventory, "stock", $event.target.value)
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.inventory.quantity,
-                    expression: "inventory.quantity"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "hidden", value: "0" },
-                domProps: { value: _vm.inventory.quantity },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.inventory, "quantity", $event.target.value)
-                  }
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
             _c(
               "td",
               [
@@ -79071,7 +78902,7 @@ var staticRenderFns = [
     return _c("td", { staticClass: "text-right" }, [
       _c("input", {
         staticClass: "btn btn-primary",
-        attrs: { type: "submit", value: "Create" }
+        attrs: { type: "submit", value: "Add" }
       })
     ])
   }
@@ -89609,6 +89440,495 @@ module.exports=function(e){function t(r){if(n[r])return n[r].exports;var o=n[r]=
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 326 */,
+/* 327 */,
+/* 328 */,
+/* 329 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(330)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(332)
+/* template */
+var __vue_template__ = __webpack_require__(333)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/inventory/Delivery.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-18c85384", Component.options)
+  } else {
+    hotAPI.reload("data-v-18c85384", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 330 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(331);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("9d672710", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-18c85384\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Delivery.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-18c85384\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Delivery.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 331 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.errors {\r\n    background: lightcoral;\r\n    border-radius:5px;\r\n    padding: 21px 0 2px 0;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 332 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validate_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validate_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_validate_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_datepicker__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'new',
+    components: {
+        Datepicker: __WEBPACK_IMPORTED_MODULE_1_vuejs_datepicker__["a" /* default */],
+        moment: __WEBPACK_IMPORTED_MODULE_2_moment___default.a
+    },
+    data: function data() {
+        return {
+            del_date: '',
+            inventory: {
+                consignor: '',
+                dr_no: '',
+                or_no: '',
+                item: ''
+            },
+            errors: null
+        };
+    },
+    mounted: function mounted() {
+        this.$store.dispatch('pickConsignor');
+    },
+
+    computed: {
+        currentUser: function currentUser() {
+            return this.$store.getters.currentUser;
+        },
+        selectconsignors: function selectconsignors() {
+            return this.$store.getters.consignor;
+        }
+    },
+    methods: {
+        add: function add() {
+            var _this = this;
+
+            var delDate = __WEBPACK_IMPORTED_MODULE_2_moment___default()(this.del_date).format();
+            var data = {
+                inv_data: this.inventory,
+                del_date: delDate
+            };
+            console.log(data);
+            axios.post('/api/inventory/new', data).then(function (response) {
+                _this.$router.push('/inventory');
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 333 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "inventory-new" }, [
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.add($event)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "form-group" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-sm-6" }, [
+              _c("label", {}, [_vm._v("DR No.")]),
+              _vm._v(" "),
+              _c("div", {}, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.inventory.dr_no,
+                      expression: "inventory.dr_no"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "DR No." },
+                  domProps: { value: _vm.inventory.dr_no },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.inventory, "dr_no", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-6" }, [
+              _c("label", {}, [_vm._v("Consignment Order No.")]),
+              _vm._v(" "),
+              _c("div", {}, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.inventory.or_no,
+                      expression: "inventory.or_no"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Consignment Order No." },
+                  domProps: { value: _vm.inventory.or_no },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.inventory, "or_no", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col-sm-6" },
+              [
+                _c("label", [_vm._v("Delivery Date")]),
+                _vm._v(" "),
+                _c("datepicker", {
+                  attrs: {
+                    "bootstrap-styling": true,
+                    format: "MM-dd-yyyy",
+                    placeholder: "MM-DD-YYYY",
+                    required: ""
+                  },
+                  model: {
+                    value: _vm.del_date,
+                    callback: function($$v) {
+                      _vm.del_date = $$v
+                    },
+                    expression: "del_date"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-6" }, [
+              _c("label", [_vm._v("Consignor")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.inventory.consignor,
+                      expression: "inventory.consignor"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.inventory,
+                        "consignor",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.selectconsignors, function(consign) {
+                  return _c("option", [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(consign.alias) +
+                        "\n                        "
+                    )
+                  ])
+                }),
+                0
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Item List")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inventory.item,
+                  expression: "inventory.item"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { required: "" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.inventory,
+                    "item",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            _vm._l(_vm.items, function(item) {
+              return _c("option", [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.consign.alias) +
+                    "\n                "
+                )
+              ])
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { attrs: { align: "center" } }, [
+          _vm._m(0),
+          _c("br"),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "btn btn-danger col-sm-3",
+                  attrs: { to: "/inventory" }
+                },
+                [_vm._v("Cancel")]
+              )
+            ],
+            1
+          )
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _vm.errors
+      ? _c("div", { staticClass: "errors" }, [
+          _c(
+            "ul",
+            _vm._l(_vm.errors, function(fieldsError, fieldName) {
+              return _c("li", { key: fieldName }, [
+                _c("strong", [_vm._v(_vm._s(fieldName))]),
+                _vm._v(" " + _vm._s(fieldsError.join("\n")) + "\n            ")
+              ])
+            }),
+            0
+          )
+        ])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { clas: "form-group" } }, [
+      _c("input", {
+        staticClass: "btn btn-primary col-sm-3",
+        attrs: { type: "submit", value: "Create" }
+      })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-18c85384", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

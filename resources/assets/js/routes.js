@@ -17,6 +17,7 @@ import InventoryNew from './components/inventory/New.vue';
 import InventoryView from './components/inventory/View.vue';
 import InventoryMain from './components/inventory/Main.vue';
 import InventoryConsignor from './components/inventory/Consignor.vue';
+import InventoryDelivery from './components/inventory/Delivery.vue';
 
 import pharmacyMain from './components/pharmacy/Main.vue';
 import pharmacyList from './components/pharmacy/List.vue';
@@ -75,6 +76,10 @@ export const routes = [
             {
                 path: 'consignor',
                 component: InventoryConsignor
+            },
+            {
+                path: 'delivery',
+                component: InventoryDelivery
             },
             {
                 path: ':itemcode',

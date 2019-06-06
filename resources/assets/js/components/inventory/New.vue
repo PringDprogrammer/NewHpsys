@@ -4,31 +4,6 @@
         <form @submit.prevent="add">
             <table class="table">
                 <tr>
-                    <th>DR No.</th>
-                    <td>
-                        <input type="text" class="form-control" v-model="inventory.dr_no" placeholder="DR No."/>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Consignment Order No.</th>
-                    <td>
-                        <input type="text" class="form-control" v-model="inventory.or_no" placeholder="Consignment Order No."/>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Delivery Date</th>
-                    <td>
-                        <div>
-                            <datepicker :bootstrap-styling="true"
-                                        v-model="del_date"
-                                        format="MM-dd-yyyy"
-                                        placeholder="MM-DD-YYYY"
-                                        required
-                            ></datepicker>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
                     <th>Item Code</th>
                     <td>
                         <input type="text" class="form-control" v-model="inventory.itemcode" placeholder="Item Code" required />
@@ -79,19 +54,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>Quantity</th>
-                    <td>
-                        <input type="text" class="form-control" v-model="inventory.stock" placeholder="Quantity" required/>
-                    </td>
-                    <td><input type="hidden" class="form-control" v-model="inventory.quantity" value="0">
-                    </td>
-                </tr>
-                <tr>
                     <td>
                         <router-link to="/inventory" class="btn btn-danger">Cancel</router-link>
                     </td>
                     <td class="text-right">
-                        <input type="submit" value="Create" class="btn btn-primary">
+                        <input type="submit" value="Add" class="btn btn-primary">
                     </td>
                 </tr>
             </table>
@@ -108,18 +75,11 @@
 
 <script>
     import validate from 'validate.js';
-    import Datepicker from 'vuejs-datepicker';
-    import moment from "moment";
 
     export default {
         name: 'new',
-        components: {
-            Datepicker,
-            moment
-        },
         data() {
             return {
-                del_date: '',
                 inventory: {
                     itemcode: '',
                     itemName: '',
@@ -128,10 +88,6 @@
                     consignor: '',
                     purchasePrice: '',
                     sellPrice: '',
-                    stock: '',
-                    quantity: '0',
-                    dr_no: '',
-                    or_no: ''
                 },
                 errors: null,
                 itemtypes: ['CS', 'GF']
@@ -150,12 +106,10 @@
         },
         methods: {
             add() {
-                var delDate = moment(this.del_date).format();
                 var data = {
-                    inv_data : this.inventory,
-                    del_date: delDate
+                    inv_data : this.inventory
                 }
-                console.log(data);
+
                 axios.post('/api/inventory/new', data)
                     .then((response) => {
                         this.$router.push('/inventory');
