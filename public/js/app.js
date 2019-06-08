@@ -80100,6 +80100,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 sellPrice: '',
                 purchPrice: ''
             },
+            row: [],
             rowTotal: '',
             invItems: [],
             deliveryItem: [],
@@ -80133,8 +80134,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         //format number to 2 decimal places
         formatPrice: function formatPrice(value) {
-            var val = (value / 1).toFixed(2).replace('.', ',');
-            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            var val = (value / 1).toFixed(2).replace(',', '.');
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         },
         ItemGenerate: function ItemGenerate() {
             var _this = this;
@@ -80161,14 +80162,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         //pag add ng item sa item table
         addItemClick: function addItemClick() {
-            var _this3 = this;
-
             this.selectedItem.push(this.deliveryItem);
-            this.selectedItem.forEach(function (itemDel) {
-                _this3.rowTotal = itemDel.quantity;
-            });
         },
         addDeliver: function addDeliver() {
+            var _this3 = this;
+
+            //wala papo tong code sa controller
+
             var delDate = __WEBPACK_IMPORTED_MODULE_2_moment___default()(this.del_date).format();
             var data = {
                 inv_data: this.inventory,
@@ -80179,10 +80179,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 del_date: delDate
             };
             console.log(data);
-            // axios.post('/api/inventory/new', data)
-            //     .then((response) => {
-            //         this.$router.push('/inventory');
-            //     });
+            axios.post('/api/inventory/new', data).then(function (response) {
+                _this3.$router.push('/inventory');
+            });
         }
     }
 });
@@ -80572,7 +80571,8 @@ var render = function() {
                               rawName: "v-model",
                               value: _vm.itemDel.unit,
                               expression: "itemDel.unit"
-                            }
+                            },
+                            { name: "uppercase", rawName: "v-uppercase" }
                           ],
                           staticClass: "form-control",
                           attrs: { type: "text" },

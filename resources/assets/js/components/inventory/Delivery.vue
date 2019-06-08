@@ -97,7 +97,7 @@
                             </td>
                             <td>
                                 <div class="col-xs-2">
-                                    <input type="text" class="form-control" v-model="itemDel.unit">
+                                    <input type="text" class="form-control" v-model="itemDel.unit" v-uppercase>
                                 </div>
                             </td>
                             <td>
@@ -162,6 +162,7 @@
                     sellPrice: '',
                     purchPrice: '',
                 },
+                row: [],
                 rowTotal: '',
                 invItems: [],
                 deliveryItem: [],
@@ -193,8 +194,8 @@
             },
             //format number to 2 decimal places
             formatPrice(value) {
-                let val = (value/1).toFixed(2).replace('.', ',')
-                return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                let val = (value/1).toFixed(2).replace(',', '.')
+                return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             },
             ItemGenerate() {
                 var consign = {
@@ -218,11 +219,11 @@
             //pag add ng item sa item table
             addItemClick() {
                 this.selectedItem.push(this.deliveryItem);
-                 this.selectedItem.forEach((itemDel) => {
-                   this.rowTotal = itemDel.quantity;
-                });
+                
             },
             addDeliver() {
+                //wala papo tong code sa controller
+                
                 var delDate = moment(this.del_date).format();
                 var data = {
                     inv_data : this.inventory,
@@ -233,10 +234,10 @@
                     del_date: delDate
                 }
                 console.log(data);
-                // axios.post('/api/inventory/new', data)
-                //     .then((response) => {
-                //         this.$router.push('/inventory');
-                //     });
+                axios.post('/api/inventory/new', data)
+                    .then((response) => {
+                        this.$router.push('/inventory');
+                    });
             }
         }
     };

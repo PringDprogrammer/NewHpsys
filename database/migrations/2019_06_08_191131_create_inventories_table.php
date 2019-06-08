@@ -23,9 +23,12 @@ class CreateInventoriesTable extends Migration
             $table->string('brandName');
             $table->string('itemType');
             $table->string('consignor');
+            $table->integer('stock');
+            $table->string('unit');
             $table->double('purchasePrice', 10, 2);
             $table->double('sellPrice', 10, 2);
-            $table->integer('stock');
+            $table->double('unit_cost', 10, 2);
+            $table->double('total', 10, 2);
             $table->integer('quantity')->nullable();
             $table->timestamps();
         });
