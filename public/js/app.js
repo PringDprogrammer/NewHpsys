@@ -78527,18 +78527,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -78551,9 +78539,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 itemName: '',
                 brand: '',
                 itemType: '',
-                consignor: '',
-                purchasePrice: '',
-                sellPrice: ''
+                consignor: ''
             },
             errors: null,
             itemtypes: ['CS', 'GF']
@@ -78618,7 +78604,8 @@ var render = function() {
                     rawName: "v-model",
                     value: _vm.inventory.itemcode,
                     expression: "inventory.itemcode"
-                  }
+                  },
+                  { name: "uppercase", rawName: "v-uppercase" }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text", placeholder: "Item Code", required: "" },
@@ -78646,7 +78633,8 @@ var render = function() {
                     rawName: "v-model",
                     value: _vm.inventory.itemName,
                     expression: "inventory.itemName"
-                  }
+                  },
+                  { name: "uppercase", rawName: "v-uppercase" }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text", placeholder: "Item Name", required: "" },
@@ -78674,7 +78662,8 @@ var render = function() {
                     rawName: "v-model",
                     value: _vm.inventory.brand,
                     expression: "inventory.brand"
-                  }
+                  },
+                  { name: "uppercase", rawName: "v-uppercase" }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text", placeholder: "Brand Name" },
@@ -78787,74 +78776,6 @@ var render = function() {
                 }),
                 0
               )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("th", [_vm._v("Purchase Price")]),
-            _vm._v(" "),
-            _c("td", [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.inventory.purchasePrice,
-                    expression: "inventory.purchasePrice"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  placeholder: "Purchase Price",
-                  required: ""
-                },
-                domProps: { value: _vm.inventory.purchasePrice },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.inventory,
-                      "purchasePrice",
-                      $event.target.value
-                    )
-                  }
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("th", [_vm._v("Selling Price")]),
-            _vm._v(" "),
-            _c("td", [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.inventory.sellPrice,
-                    expression: "inventory.sellPrice"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  placeholder: "Selling Price",
-                  required: ""
-                },
-                domProps: { value: _vm.inventory.sellPrice },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.inventory, "sellPrice", $event.target.value)
-                  }
-                }
-              })
             ])
           ]),
           _vm._v(" "),
@@ -80073,6 +79994,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -80083,6 +80007,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         Datepicker: __WEBPACK_IMPORTED_MODULE_1_vuejs_datepicker__["a" /* default */],
         moment: __WEBPACK_IMPORTED_MODULE_2_moment___default.a
     },
+
     data: function data() {
         return {
             del_date: '',
@@ -80090,22 +80015,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 consignor: '',
                 dr_no: '',
                 or_no: '',
-                item: ''
+                item_med: ''
             },
-            itemDel: {
-                quantity: '',
-                quantity1: '',
-                unit: '',
-                cost: '',
-                sellPrice: '',
-                purchPrice: ''
-            },
-            row: [],
-            rowTotal: '',
+            row: '',
             invItems: [],
             deliveryItem: [],
             selectedItem: [],
-            item_total: [],
             errors: null
         };
     },
@@ -80119,17 +80034,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         selectconsignors: function selectconsignors() {
             return this.$store.getters.consignor;
-        },
-        itemTotal: function itemTotal() {
-            var qty = this.itemDel.quantity;
-            var cost = this.itemDel.cost;
-            return this.item_total = qty * cost;
         }
     },
     methods: {
-        //pag delete ng item order sa order table
+        //pag delete ng item sa order table
         removeItem: function removeItem(index) {
             this.selectedItem.splice(index, 1);
+        },
+        itemTotal: function itemTotal(index, quantity, unit_cost) {
+
+            if (quantity == '' || unit_cost == '') {
+                return "0.00";
+            } else if (isNaN(quantity) || isNaN(unit_cost)) {
+                return "0.00";
+            } else {
+                return this.selectedItem[index].item_total = quantity * unit_cost;
+            }
         },
 
         //format number to 2 decimal places
@@ -80149,12 +80069,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
 
-        //pag generate ng napiling item
+        //pag kuha ng napiling item
         itemPick: function itemPick(event) {
             var _this2 = this;
 
             var itemcode = event.target.value.split('-')[0];
-
             axios.post('/api/inventory/itemPick/' + itemcode).then(function (response) {
                 _this2.deliveryItem = response.data.item;
             });
@@ -80163,25 +80082,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         //pag add ng item sa item table
         addItemClick: function addItemClick() {
             this.selectedItem.push(this.deliveryItem);
+            Object.assign(this.selectedItem, [{ quantity: 0, unit_cost: 0, item_total: 0 }]);
         },
         addDeliver: function addDeliver() {
-            var _this3 = this;
-
-            //wala papo tong code sa controller
-
             var delDate = __WEBPACK_IMPORTED_MODULE_2_moment___default()(this.del_date).format();
             var data = {
                 inv_data: this.inventory,
-                itemDel: this.itemDel,
-                others: {
-                    item_total: this.item_total
-                },
+                items: this.selectedItem,
+                itemtotal: this.item_total,
                 del_date: delDate
             };
-            console.log(data);
-            axios.post('/api/inventory/new', data).then(function (response) {
-                _this3.$router.push('/inventory');
-            });
+            console.table(data.itemtotal);
+            //console.log(data);
+            // axios.post('/api/inventory/', data)
+            //     .then((response) => {
+            //         this.$router.push('/inventory');
+            //     });
         }
     }
 });
@@ -80358,8 +80274,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.inventory.item,
-                      expression: "inventory.item"
+                      value: _vm.inventory.item_med,
+                      expression: "inventory.item_med"
                     }
                   ],
                   staticClass: "form-control",
@@ -80377,7 +80293,7 @@ var render = function() {
                           })
                         _vm.$set(
                           _vm.inventory,
-                          "item",
+                          "item_med",
                           $event.target.multiple
                             ? $$selectedVal
                             : $$selectedVal[0]
@@ -80453,47 +80369,28 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.itemDel.quantity,
-                              expression: "itemDel.quantity"
+                              value: _vm.selectedItem[k].quantity,
+                              expression: "selectedItem[k].quantity"
                             }
                           ],
                           staticClass: "form-control",
                           attrs: { type: "text" },
-                          domProps: { value: _vm.itemDel.quantity },
+                          domProps: { value: _vm.selectedItem[k].quantity },
                           on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.itemDel,
-                                "quantity",
-                                $event.target.value
+                            change: function($event) {
+                              return _vm.itemTotal(
+                                k,
+                                _vm.selectedItem[k].quantity,
+                                _vm.selectedItem[k].unit_cost
                               )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.itemDel.quantity2,
-                              expression: "itemDel.quantity2"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "hidden", value: "0" },
-                          domProps: { value: _vm.itemDel.quantity2 },
-                          on: {
+                            },
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
                               _vm.$set(
-                                _vm.itemDel,
-                                "quantity2",
+                                _vm.selectedItem[k],
+                                "quantity",
                                 $event.target.value
                               )
                             }
@@ -80509,20 +80406,20 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.itemDel.purchPrice,
-                              expression: "itemDel.purchPrice"
+                              value: _vm.selectedItem[k].purchPrice,
+                              expression: "selectedItem[k].purchPrice"
                             }
                           ],
                           staticClass: "form-control",
                           attrs: { type: "text" },
-                          domProps: { value: _vm.itemDel.purchPrice },
+                          domProps: { value: _vm.selectedItem[k].purchPrice },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
                               _vm.$set(
-                                _vm.itemDel,
+                                _vm.selectedItem[k],
                                 "purchPrice",
                                 $event.target.value
                               )
@@ -80539,21 +80436,21 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.itemDel.sellPrice,
-                              expression: "itemDel.sellPrice"
+                              value: _vm.selectedItem[k].sellprice,
+                              expression: "selectedItem[k].sellprice"
                             }
                           ],
                           staticClass: "form-control",
                           attrs: { type: "text" },
-                          domProps: { value: _vm.itemDel.sellPrice },
+                          domProps: { value: _vm.selectedItem[k].sellprice },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
                               _vm.$set(
-                                _vm.itemDel,
-                                "sellPrice",
+                                _vm.selectedItem[k],
+                                "sellprice",
                                 $event.target.value
                               )
                             }
@@ -80569,20 +80466,24 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.itemDel.unit,
-                              expression: "itemDel.unit"
+                              value: _vm.selectedItem[k].unit,
+                              expression: "selectedItem[k].unit"
                             },
                             { name: "uppercase", rawName: "v-uppercase" }
                           ],
                           staticClass: "form-control",
                           attrs: { type: "text" },
-                          domProps: { value: _vm.itemDel.unit },
+                          domProps: { value: _vm.selectedItem[k].unit },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(_vm.itemDel, "unit", $event.target.value)
+                              _vm.$set(
+                                _vm.selectedItem[k],
+                                "unit",
+                                $event.target.value
+                              )
                             }
                           }
                         })
@@ -80596,19 +80497,30 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.itemDel.cost,
-                              expression: "itemDel.cost"
+                              value: _vm.selectedItem[k].unit_cost,
+                              expression: "selectedItem[k].unit_cost"
                             }
                           ],
                           staticClass: "form-control",
                           attrs: { type: "text" },
-                          domProps: { value: _vm.itemDel.cost },
+                          domProps: { value: _vm.selectedItem[k].unit_cost },
                           on: {
+                            change: function($event) {
+                              return _vm.itemTotal(
+                                k,
+                                _vm.selectedItem[k].quantity,
+                                _vm.selectedItem[k].unit_cost
+                              )
+                            },
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(_vm.itemDel, "cost", $event.target.value)
+                              _vm.$set(
+                                _vm.selectedItem[k],
+                                "unit_cost",
+                                $event.target.value
+                              )
                             }
                           }
                         })
@@ -80618,7 +80530,7 @@ var render = function() {
                     _c("td", [
                       _vm._v(
                         "\n                            " +
-                          _vm._s(_vm.formatPrice(_vm.itemTotal)) +
+                          _vm._s(_vm.selectedItem[k].item_total) +
                           "\n                        "
                       )
                     ]),

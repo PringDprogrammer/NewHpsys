@@ -63,8 +63,6 @@ class InventoryController extends Controller
         $inventory->brandName     = $invData['brand'];
         $inventory->itemType      = $invData['itemType'];
         $inventory->consignor     = $invData['consignor'];
-        $inventory->purchasePrice = $invData['purchasePrice'];
-        $inventory->sellPrice     = $invData['sellPrice'];
         $inventory->save();
 
         

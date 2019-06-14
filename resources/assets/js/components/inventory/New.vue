@@ -6,19 +6,19 @@
                 <tr>
                     <th>Item Code</th>
                     <td>
-                        <input type="text" class="form-control" v-model="inventory.itemcode" placeholder="Item Code" required />
+                        <input type="text" class="form-control" v-model="inventory.itemcode" placeholder="Item Code" v-uppercase required />
                     </td>
                 </tr>
                 <tr>
                     <th>Item Name</th>
                     <td>
-                        <input type="text" class="form-control" v-model="inventory.itemName" placeholder="Item Name" required/>
+                        <input type="text" class="form-control" v-model="inventory.itemName" placeholder="Item Name" v-uppercase required/>
                     </td>
                 </tr>
                 <tr>
                     <th>Brand Name</th>
                     <td>
-                        <input type="text" class="form-control" v-model="inventory.brand" placeholder="Brand Name" />
+                        <input type="text" class="form-control" v-model="inventory.brand" placeholder="Brand Name" v-uppercase />
                     </td>
                 </tr>
                 <tr>
@@ -39,18 +39,6 @@
 								{{ consign.alias }}
 							</option>
 						</select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Purchase Price</th>
-                    <td>
-                        <input type="text" class="form-control" v-model="inventory.purchasePrice" placeholder="Purchase Price" required/>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Selling Price</th>
-                    <td>
-                        <input type="text" class="form-control" v-model="inventory.sellPrice" placeholder="Selling Price" required/>
                     </td>
                 </tr>
                 <tr>
@@ -86,8 +74,6 @@
                     brand: '',
                     itemType: '',
                     consignor: '',
-                    purchasePrice: '',
-                    sellPrice: '',
                 },
                 errors: null,
                 itemtypes: ['CS', 'GF']

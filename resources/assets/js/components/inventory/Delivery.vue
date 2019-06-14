@@ -42,7 +42,7 @@
                 <label>Item List</label>
                 <div class="row">
                     <div class="col-sm-9">
-                        <select class="form-control" v-model="inventory.item" @change="itemPick($event)" required>
+                        <select class="form-control" v-model="inventory.item_med" @change="itemPick($event)" required>
                             <option v-for="select in invItems">
                                 {{ select.itemcode }} - {{select.brandName}} {{select.itemName}} ({{select.itemType}})
                             </option>
@@ -74,39 +74,42 @@
                             </tr>
                     </template>
                     <template>
-                        <tr v-for="(item , k) in selectedItem" :key="k">
+                        <tr v-for="(item, k) in selectedItem" :key="k">
                             <td>{{ item.itemcode }}</td>
                             <td>{{ item.itemName }}</td>
                             <td>{{ item.itemType }}</td>
                             <td>{{ item.brandName }}</td>
                             <td>
                                 <div class="col-xs-2">
-                                    <input type="text" class="form-control" v-model="itemDel.quantity">
-                                    <input type="hidden" class="form-control" value="0" v-model="itemDel.quantity2">
+                                    <input type="text" class="form-control" 
+                                    v-model="selectedItem[k].quantity" 
+                                    @change="itemTotal(k,selectedItem[k].quantity, selectedItem[k].unit_cost)"> 
                                 </div>
                             </td>
                             <td>
                                 <div class="col-xs-2">
-                                    <input type="text" class="form-control" v-model="itemDel.purchPrice">
+                                    <input type="text" class="form-control" v-model="selectedItem[k].purchPrice">
                                 </div>
                             </td>
                             <td>
                                 <div class="col-xs-2">
-                                    <input type="text" class="form-control" v-model="itemDel.sellPrice">
+                                    <input type="text" class="form-control" v-model="selectedItem[k].sellprice">
                                 </div>
                             </td>
                             <td>
                                 <div class="col-xs-2">
-                                    <input type="text" class="form-control" v-model="itemDel.unit" v-uppercase>
+                                    <input type="text" class="form-control" v-model="selectedItem[k].unit" v-uppercase>
                                 </div>
                             </td>
                             <td>
                                 <div class="col-xs-2">
-                                    <input type="text" class="form-control" v-model="itemDel.cost">
+                                    <input type="text" class="form-control" 
+                                    v-model="selectedItem[k].unit_cost" 
+                                    @change="itemTotal(k, selectedItem[k].quantity , selectedItem[k].unit_cost)">
                                 </div>
                             </td>
                             <td>
-                                {{ formatPrice(itemTotal) }}
+                                {{ selectedItem[k].item_total }}
                             </td>
                             <td>
                                 <button class="btn" type="button" name="button" @click="removeItem(k, item)">X</button>
@@ -145,6 +148,7 @@
             Datepicker,
             moment
         },
+        
         data() {
             return {
                 del_date: '',
@@ -152,27 +156,18 @@
                     consignor: '',
                     dr_no: '',
                     or_no: '',
-                    item: ''
+                    item_med: ''
                 },
-                itemDel: {
-                    quantity: '',
-                    quantity1: '',
-                    unit: '',
-                    cost: '',
-                    sellPrice: '',
-                    purchPrice: '',
-                },
-                row: [],
-                rowTotal: '',
+                row: '',
                 invItems: [],
                 deliveryItem: [],
                 selectedItem: [],
-                item_total: [],
                 errors: null,
             };
         },
         mounted() {
             this.$store.dispatch('pickConsignor');
+
         },
         computed: {
             currentUser() {
@@ -181,16 +176,21 @@
             selectconsignors() {
                 return this.$store.getters.consignor;
             },
-            itemTotal() {
-                var qty = this.itemDel.quantity;
-                var cost = this.itemDel.cost;
-                return this.item_total = qty * cost ;
-            }
         },
         methods: {
-            //pag delete ng item order sa order table
+            //pag delete ng item sa order table
             removeItem(index) {
                 this.selectedItem.splice(index, 1);
+            },
+            itemTotal(index, quantity, unit_cost) {
+       
+                if(quantity == '' || unit_cost == '' ){
+                    return "0.00"
+                } else if (isNaN(quantity) || isNaN(unit_cost)) {
+                    return "0.00"
+                } else {
+                    return this.selectedItem[index].item_total = quantity * unit_cost;
+                }
             },
             //format number to 2 decimal places
             formatPrice(value) {
@@ -207,10 +207,9 @@
                         this.invItems = response.data.invItem;
                     });
             },
-            //pag generate ng napiling item
+            //pag kuha ng napiling item
             itemPick(event) {
                 let itemcode = event.target.value.split('-')[0];
-
                 axios.post('/api/inventory/itemPick/'+itemcode)
                    .then((response) => {
                      this.deliveryItem = response.data.item;
@@ -219,25 +218,23 @@
             //pag add ng item sa item table
             addItemClick() {
                 this.selectedItem.push(this.deliveryItem);
-                
+                Object.assign(this.selectedItem, [{ quantity: 0, unit_cost: 0, item_total: 0 }]); 
+              
             },
             addDeliver() {
-                //wala papo tong code sa controller
-                
                 var delDate = moment(this.del_date).format();
                 var data = {
                     inv_data : this.inventory,
-                    itemDel: this.itemDel,
-                    others: {
-                        item_total: this.item_total
-                    },
+                    items: this.selectedItem,
+                    itemtotal: this.item_total,
                     del_date: delDate
                 }
-                console.log(data);
-                axios.post('/api/inventory/new', data)
-                    .then((response) => {
-                        this.$router.push('/inventory');
-                    });
+               console.table(data.itemtotal);
+                //console.log(data);
+                // axios.post('/api/inventory/', data)
+                //     .then((response) => {
+                //         this.$router.push('/inventory');
+                //     });
             }
         }
     };

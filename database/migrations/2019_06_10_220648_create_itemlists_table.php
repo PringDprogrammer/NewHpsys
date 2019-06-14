@@ -20,8 +20,6 @@ class CreateItemlistsTable extends Migration
             $table->string('brandName')->nullable();
             $table->string('itemType');
             $table->string('consignor');
-            $table->double('purchasePrice', 10, 2);
-            $table->double('sellPrice', 10, 2);
             $table->timestamps();
         });
     }
