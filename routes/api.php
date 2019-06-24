@@ -34,7 +34,7 @@ Route::group(['middleware' => 'jwt.auth'], function ($router) {
     Route::post('inventory/consignor', 'InventoryController@addConsignor');
     Route::delete('inventory/delete/{itemcode}', 'InventoryController@delete');
     Route::get('inventory/pickconsignor', 'InventoryController@pickConsignor');
-
+    Route::post('inventory/addDelivery', 'InventoryController@addDelivery');
     Route::post('inventory/itemPick/{itemcode}', 'InventoryController@itemPick');
 
     Route::post('inventory/itemChange', 'InventoryController@itemChange');

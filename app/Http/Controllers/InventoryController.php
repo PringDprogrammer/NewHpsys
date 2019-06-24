@@ -15,7 +15,11 @@ class InventoryController extends Controller
 {
     public function all()
     {
-        $inventories = ItemList::all();
+        // $inventories = ItemList::all();
+        $inventories = DB::table('itemlists')
+            ->join('inventories', 'itemlists.itemcode', '=', 'inventories.itemcode')
+            ->select('itemlists.itemcode', 'itemlists.itemName', 'itemlists.itemType', 'itemlists.consignor', 'itemlists.brandName', 'inventories.unit_cost', 'inventories.sellPrice', 'inventories.quantity')
+            ->get();
 
         return response()->json([
             'inventory' => $inventories
@@ -29,6 +33,36 @@ class InventoryController extends Controller
         return response()->json([
             'item' => $item
         ]);
+    }
+
+    public function addDelivery(Request $request) {
+        $inv_data   = $request->input('inv_data');
+        $items      = $request->input('order_item');
+        $del_date   = Carbon::parse($request->input('del_date'))->format('Y-m-d');
+
+        $or_no = $inv_data['or_no']; 
+        $dr_no = $inv_data['dr_no'];
+        $con = $inv_data['consignor'];
+
+        foreach ($items as $item) {
+            $delivery = new Inventories();
+            $delivery->dr_no        = $dr_no;
+            $delivery->or_no        = $or_no;
+            $delivery->del_date     = $del_date;
+            $delivery->itemcode     = $item['itemcode'];
+            $delivery->itemName     = $item['itemName'];
+            $delivery->brandName    = $item['brandName'];
+            $delivery->itemType     = $item['itemType'];
+            $delivery->consignor    = $con;
+            $delivery->quantity     = $item['quantity'];
+            $delivery->unit         = strtoupper($item['unit']);
+            $delivery->sellPrice    = $item['sellprice'];
+            $delivery->unit_cost    = $item['unit_cost'];
+            $delivery->total        = $item['item_total'];
+            $delivery->save();
+        }
+
+
     }
 
     public function itemChange(Request $request) 

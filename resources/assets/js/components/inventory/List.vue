@@ -20,7 +20,7 @@
 					<th>Item Name</th>
 					<th>Item type</th>
 					<th>Consignor</th>
-					<th>Purchase Price</th>
+					<th>Unit Cost</th>
 					<th>Selling Price</th>
 					<th>Stock</th>
 					<th>Action</th>
@@ -34,12 +34,12 @@
 	                <template v-else>
 	                    <tr v-for="item in filteredItems" :key="item.id">
 	                        <td>{{ item.itemcode }}</td>
-	                        <td>{{ item.itemName }}</td>
+	                        <td>{{ item.brandName }} {{ item.itemName }}</td>
 	                        <td>{{ item.itemType }}</td>
 	                        <td>{{ item.consignor }}</td>
-	                        <td>{{ formatPrice(item.purchasePrice) }}</td>
+	                        <td>{{ formatPrice(item.unit_cost) }}</td>
 	                        <td>{{ formatPrice(item.sellPrice) }}</td>
-	                        <td>{{ item.stock }}</td>
+	                        <td>{{ item.quantity }}</td>
 	                        <td>
 	                        	<router-link :to="`/inventory/${item.itemcode}`">View</router-link>
 	                        </td>
@@ -57,16 +57,26 @@
         name: 'inventory',
         data() {
         	return {
-        		searchItem: ''
+        		searchItem: '',
+        		inventory: {
+        			itemcode: '',
+        			itemName: '',
+        			itemType: '',
+        			brandName: '',
+        			consignor: '', 
+        			unit_cost: '',
+        			sellPrice: '',
+        			quantity: ''
+        		}
         	};
         },
-        mounted() {
-            this.$store.dispatch('getItems');
+        created() {
+	        axios.get('/api/inventory')
+	            .then((response)=> {
+	                this.inventory = response.data.inventory;
+	            })
         },
         computed: {
-            inventory() {
-                return this.$store.getters.inventory;
-            },
             filteredItems:function()
             {
                 if(this.searchItem) {

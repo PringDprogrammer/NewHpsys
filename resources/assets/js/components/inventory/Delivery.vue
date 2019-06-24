@@ -60,10 +60,10 @@
                     <th>Item Type</th>
                     <th>Brand Name</th>
                     <th>Quantity</th>
-                    <th>Purchase Price</th>
+                    <th>Unit Cost</th>
+                    <!-- <th>Purchase Price</th> -->
                     <th>Sell Price</th>
                     <th>Unit</th>
-                    <th>Unit Cost</th>
                     <th>Total</th>
                     <th>Action</th>
                 </thead>
@@ -73,7 +73,7 @@
                                 <td colspan="12" class="text-center">No records found in the database</td>
                             </tr>
                     </template>
-                    <template>
+                    <template v-if="selectedItem.length">
                         <tr v-for="(item, k) in selectedItem" :key="k">
                             <td>{{ item.itemcode }}</td>
                             <td>{{ item.itemName }}</td>
@@ -82,15 +82,20 @@
                             <td>
                                 <div class="col-xs-2">
                                     <input type="text" class="form-control" 
-                                    v-model="selectedItem[k].quantity" 
-                                    @change="itemTotal(k,selectedItem[k].quantity, selectedItem[k].unit_cost)"> 
+                                    v-model="selectedItem[k].quantity"> 
                                 </div>
                             </td>
                             <td>
                                 <div class="col-xs-2">
-                                    <input type="text" class="form-control" v-model="selectedItem[k].purchPrice">
+                                    <input type="text" class="form-control" 
+                                    v-model="selectedItem[k].unit_cost" @change = "itemTotal(k)">
                                 </div>
                             </td>
+                            <!-- <td>
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control" v-model="selectedItem[k].purchPrice">
+                                </div>
+                            </td> -->
                             <td>
                                 <div class="col-xs-2">
                                     <input type="text" class="form-control" v-model="selectedItem[k].sellprice">
@@ -102,14 +107,7 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="col-xs-2">
-                                    <input type="text" class="form-control" 
-                                    v-model="selectedItem[k].unit_cost" 
-                                    @change="itemTotal(k, selectedItem[k].quantity , selectedItem[k].unit_cost)">
-                                </div>
-                            </td>
-                            <td>
-                                {{ selectedItem[k].item_total }}
+                                {{ formatPrice(selectedItem[k].item_total ? selectedItem[k].item_total: '0.00') }}
                             </td>
                             <td>
                                 <button class="btn" type="button" name="button" @click="removeItem(k, item)">X</button>
@@ -148,7 +146,6 @@
             Datepicker,
             moment
         },
-        
         data() {
             return {
                 del_date: '',
@@ -158,7 +155,6 @@
                     or_no: '',
                     item_med: ''
                 },
-                row: '',
                 invItems: [],
                 deliveryItem: [],
                 selectedItem: [],
@@ -182,15 +178,10 @@
             removeItem(index) {
                 this.selectedItem.splice(index, 1);
             },
-            itemTotal(index, quantity, unit_cost) {
-       
-                if(quantity == '' || unit_cost == '' ){
-                    return "0.00"
-                } else if (isNaN(quantity) || isNaN(unit_cost)) {
-                    return "0.00"
-                } else {
-                    return this.selectedItem[index].item_total = quantity * unit_cost;
-                }
+            //pagkuha ng itemTotal per row
+            itemTotal(index) {
+                let item = this.selectedItem[index];
+                this.selectedItem[index].item_total = item.quantity * item.unit_cost;
             },
             //format number to 2 decimal places
             formatPrice(value) {
@@ -210,31 +201,30 @@
             //pag kuha ng napiling item
             itemPick(event) {
                 let itemcode = event.target.value.split('-')[0];
+
                 axios.post('/api/inventory/itemPick/'+itemcode)
                    .then((response) => {
                      this.deliveryItem = response.data.item;
+
                    });
             },
             //pag add ng item sa item table
             addItemClick() {
                 this.selectedItem.push(this.deliveryItem);
-                Object.assign(this.selectedItem, [{ quantity: 0, unit_cost: 0, item_total: 0 }]); 
-              
             },
             addDeliver() {
                 var delDate = moment(this.del_date).format();
                 var data = {
                     inv_data : this.inventory,
-                    items: this.selectedItem,
-                    itemtotal: this.item_total,
+                    order_item: this.selectedItem,
                     del_date: delDate
                 }
-               console.table(data.itemtotal);
-                //console.log(data);
-                // axios.post('/api/inventory/', data)
-                //     .then((response) => {
-                //         this.$router.push('/inventory');
-                //     });
+                console.log(data);
+                axios.post('/api/inventory/addDelivery', data)
+                    .then((response) => {
+                        alert('New Delivery Saved!');
+                        this.$router.push('/inventory');
+                    });
             }
         }
     };

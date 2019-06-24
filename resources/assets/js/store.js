@@ -9,7 +9,6 @@ export default {
         loading: false,
         auth_error: null,
         customers: [],
-        inventory: [],
         walkins: [],
         inpatients: [],
         walkinOrder: [],
@@ -20,6 +19,7 @@ export default {
         inpatientsReport: [],
         doctor: [],
         tableDoctors: [],
+        // inventory: [],
         //invItem: []
     },
     getters: {
@@ -38,9 +38,9 @@ export default {
         customers(state) {
             return state.customers;
         },
-        inventory(state) {
-            return state.inventory;
-        },
+        // inventory(state) {
+        //     return state.inventory;
+        // },
         walkins(state) {
             return state.walkins;
         },
@@ -94,9 +94,9 @@ export default {
         updateCustomers(state, payload) {
             state.customers = payload;
         },
-        inventoryItems(state, payload) {
-            state.inventory = payload;
-        },
+        // inventoryItems(state, payload) {
+        //     state.inventory = payload;
+        // },
         patientWalkin(state, payload) {
             state.walkins = payload;
         },
@@ -154,12 +154,12 @@ export default {
                 context.commit('updateCustomers', response.data.customers);
             })
         },
-        getItems(context) {
-            axios.get('/api/inventory')
-            .then((response)=> {
-                context.commit('inventoryItems', response.data.inventory);
-            })
-        },
+        // getItems(context) {
+        //     axios.get('/api/inventory')
+        //     .then((response)=> {
+        //         context.commit('inventoryItems', response.data.inventory);
+        //     })
+        // },
         getWalkin(context) {
             axios.get('/api/pharmacy')
             .then((response)=> {

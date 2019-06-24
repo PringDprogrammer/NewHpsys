@@ -78164,24 +78164,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: 'inventory',
     data: function data() {
         return {
-            searchItem: ''
+            searchItem: '',
+            inventory: {
+                itemcode: '',
+                itemName: '',
+                itemType: '',
+                brandName: '',
+                consignor: '',
+                unit_cost: '',
+                sellPrice: '',
+                quantity: ''
+            }
         };
     },
-    mounted: function mounted() {
-        this.$store.dispatch('getItems');
+    created: function created() {
+        var _this = this;
+
+        axios.get('/api/inventory').then(function (response) {
+            _this.inventory = response.data.inventory;
+        });
     },
 
     computed: {
-        inventory: function inventory() {
-            return this.$store.getters.inventory;
-        },
-
         filteredItems: function filteredItems() {
-            var _this = this;
+            var _this2 = this;
 
             if (this.searchItem) {
                 return this.inventory.filter(function (name) {
-                    return name.itemName.startsWith(_this.searchItem) || name.itemType.startsWith(_this.searchItem) || name.consignor.startsWith(_this.searchItem) || name.itemcode.startsWith(_this.searchItem);
+                    return name.itemName.startsWith(_this2.searchItem) || name.itemType.startsWith(_this2.searchItem) || name.consignor.startsWith(_this2.searchItem) || name.itemcode.startsWith(_this2.searchItem);
                 });
             } else {
                 return this.inventory;
@@ -78284,21 +78294,25 @@ var render = function() {
                       return _c("tr", { key: item.id }, [
                         _c("td", [_vm._v(_vm._s(item.itemcode))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(item.itemName))]),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(item.brandName) + " " + _vm._s(item.itemName)
+                          )
+                        ]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(item.itemType))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(item.consignor))]),
                         _vm._v(" "),
                         _c("td", [
-                          _vm._v(_vm._s(_vm.formatPrice(item.purchasePrice)))
+                          _vm._v(_vm._s(_vm.formatPrice(item.unit_cost)))
                         ]),
                         _vm._v(" "),
                         _c("td", [
                           _vm._v(_vm._s(_vm.formatPrice(item.sellPrice)))
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(item.stock))]),
+                        _c("td", [_vm._v(_vm._s(item.quantity))]),
                         _vm._v(" "),
                         _c(
                           "td",
@@ -78336,7 +78350,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Consignor")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Purchase Price")]),
+      _c("th", [_vm._v("Unit Cost")]),
       _vm._v(" "),
       _c("th", [_vm._v("Selling Price")]),
       _vm._v(" "),
@@ -79995,8 +80009,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -80007,7 +80019,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         Datepicker: __WEBPACK_IMPORTED_MODULE_1_vuejs_datepicker__["a" /* default */],
         moment: __WEBPACK_IMPORTED_MODULE_2_moment___default.a
     },
-
     data: function data() {
         return {
             del_date: '',
@@ -80017,7 +80028,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 or_no: '',
                 item_med: ''
             },
-            row: '',
             invItems: [],
             deliveryItem: [],
             selectedItem: [],
@@ -80041,15 +80051,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         removeItem: function removeItem(index) {
             this.selectedItem.splice(index, 1);
         },
-        itemTotal: function itemTotal(index, quantity, unit_cost) {
 
-            if (quantity == '' || unit_cost == '') {
-                return "0.00";
-            } else if (isNaN(quantity) || isNaN(unit_cost)) {
-                return "0.00";
-            } else {
-                return this.selectedItem[index].item_total = quantity * unit_cost;
-            }
+        //pagkuha ng itemTotal per row
+        itemTotal: function itemTotal(index) {
+            var item = this.selectedItem[index];
+            this.selectedItem[index].item_total = item.quantity * item.unit_cost;
         },
 
         //format number to 2 decimal places
@@ -80074,6 +80080,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             var itemcode = event.target.value.split('-')[0];
+
             axios.post('/api/inventory/itemPick/' + itemcode).then(function (response) {
                 _this2.deliveryItem = response.data.item;
             });
@@ -80082,22 +80089,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         //pag add ng item sa item table
         addItemClick: function addItemClick() {
             this.selectedItem.push(this.deliveryItem);
-            Object.assign(this.selectedItem, [{ quantity: 0, unit_cost: 0, item_total: 0 }]);
         },
         addDeliver: function addDeliver() {
+            var _this3 = this;
+
             var delDate = __WEBPACK_IMPORTED_MODULE_2_moment___default()(this.del_date).format();
             var data = {
                 inv_data: this.inventory,
-                items: this.selectedItem,
-                itemtotal: this.item_total,
+                order_item: this.selectedItem,
                 del_date: delDate
             };
-            console.table(data.itemtotal);
-            //console.log(data);
-            // axios.post('/api/inventory/', data)
-            //     .then((response) => {
-            //         this.$router.push('/inventory');
-            //     });
+            console.log(data);
+            axios.post('/api/inventory/addDelivery', data).then(function (response) {
+                alert('New Delivery Saved!');
+                _this3.$router.push('/inventory');
+            });
         }
     }
 });
@@ -80352,206 +80358,177 @@ var render = function() {
               [
                 !_vm.selectedItem.length ? [_vm._m(1)] : _vm._e(),
                 _vm._v(" "),
-                _vm._l(_vm.selectedItem, function(item, k) {
-                  return _c("tr", { key: k }, [
-                    _c("td", [_vm._v(_vm._s(item.itemcode))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.itemName))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.itemType))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(item.brandName))]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("div", { staticClass: "col-xs-2" }, [
-                        _c("input", {
-                          directives: [
+                _vm.selectedItem.length
+                  ? _vm._l(_vm.selectedItem, function(item, k) {
+                      return _c("tr", { key: k }, [
+                        _c("td", [_vm._v(_vm._s(item.itemcode))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.itemName))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.itemType))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.brandName))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("div", { staticClass: "col-xs-2" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.selectedItem[k].quantity,
+                                  expression: "selectedItem[k].quantity"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.selectedItem[k].quantity },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.selectedItem[k],
+                                    "quantity",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("div", { staticClass: "col-xs-2" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.selectedItem[k].unit_cost,
+                                  expression: "selectedItem[k].unit_cost"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text" },
+                              domProps: {
+                                value: _vm.selectedItem[k].unit_cost
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.itemTotal(k)
+                                },
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.selectedItem[k],
+                                    "unit_cost",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("div", { staticClass: "col-xs-2" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.selectedItem[k].sellprice,
+                                  expression: "selectedItem[k].sellprice"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text" },
+                              domProps: {
+                                value: _vm.selectedItem[k].sellprice
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.selectedItem[k],
+                                    "sellprice",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("div", { staticClass: "col-xs-2" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.selectedItem[k].unit,
+                                  expression: "selectedItem[k].unit"
+                                },
+                                { name: "uppercase", rawName: "v-uppercase" }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.selectedItem[k].unit },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.selectedItem[k],
+                                    "unit",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(
+                                _vm.formatPrice(
+                                  _vm.selectedItem[k].item_total
+                                    ? _vm.selectedItem[k].item_total
+                                    : "0.00"
+                                )
+                              ) +
+                              "\n                        "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "button",
                             {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.selectedItem[k].quantity,
-                              expression: "selectedItem[k].quantity"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.selectedItem[k].quantity },
-                          on: {
-                            change: function($event) {
-                              return _vm.itemTotal(
-                                k,
-                                _vm.selectedItem[k].quantity,
-                                _vm.selectedItem[k].unit_cost
-                              )
+                              staticClass: "btn",
+                              attrs: { type: "button", name: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.removeItem(k, item)
+                                }
+                              }
                             },
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.selectedItem[k],
-                                "quantity",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
+                            [_vm._v("X")]
+                          )
+                        ])
                       ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("div", { staticClass: "col-xs-2" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.selectedItem[k].purchPrice,
-                              expression: "selectedItem[k].purchPrice"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.selectedItem[k].purchPrice },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.selectedItem[k],
-                                "purchPrice",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("div", { staticClass: "col-xs-2" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.selectedItem[k].sellprice,
-                              expression: "selectedItem[k].sellprice"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.selectedItem[k].sellprice },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.selectedItem[k],
-                                "sellprice",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("div", { staticClass: "col-xs-2" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.selectedItem[k].unit,
-                              expression: "selectedItem[k].unit"
-                            },
-                            { name: "uppercase", rawName: "v-uppercase" }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.selectedItem[k].unit },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.selectedItem[k],
-                                "unit",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("div", { staticClass: "col-xs-2" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.selectedItem[k].unit_cost,
-                              expression: "selectedItem[k].unit_cost"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.selectedItem[k].unit_cost },
-                          on: {
-                            change: function($event) {
-                              return _vm.itemTotal(
-                                k,
-                                _vm.selectedItem[k].quantity,
-                                _vm.selectedItem[k].unit_cost
-                              )
-                            },
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.selectedItem[k],
-                                "unit_cost",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(_vm.selectedItem[k].item_total) +
-                          "\n                        "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn",
-                          attrs: { type: "button", name: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.removeItem(k, item)
-                            }
-                          }
-                        },
-                        [_vm._v("X")]
-                      )
-                    ])
-                  ])
-                })
+                    })
+                  : _vm._e()
               ],
               2
             )
@@ -80619,13 +80596,11 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Quantity")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Purchase Price")]),
+      _c("th", [_vm._v("Unit Cost")]),
       _vm._v(" "),
       _c("th", [_vm._v("Sell Price")]),
       _vm._v(" "),
       _c("th", [_vm._v("Unit")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Unit Cost")]),
       _vm._v(" "),
       _c("th", [_vm._v("Total")]),
       _vm._v(" "),
@@ -89622,7 +89597,6 @@ var user = Object(__WEBPACK_IMPORTED_MODULE_0__helpers_auth__["a" /* getLocalUse
         loading: false,
         auth_error: null,
         customers: [],
-        inventory: [],
         walkins: [],
         inpatients: [],
         walkinOrder: [],
@@ -89633,6 +89607,7 @@ var user = Object(__WEBPACK_IMPORTED_MODULE_0__helpers_auth__["a" /* getLocalUse
         inpatientsReport: [],
         doctor: [],
         tableDoctors: []
+        // inventory: [],
         //invItem: []
     },
     getters: {
@@ -89651,9 +89626,10 @@ var user = Object(__WEBPACK_IMPORTED_MODULE_0__helpers_auth__["a" /* getLocalUse
         customers: function customers(state) {
             return state.customers;
         },
-        inventory: function inventory(state) {
-            return state.inventory;
-        },
+
+        // inventory(state) {
+        //     return state.inventory;
+        // },
         walkins: function walkins(state) {
             return state.walkins;
         },
@@ -89708,9 +89684,10 @@ var user = Object(__WEBPACK_IMPORTED_MODULE_0__helpers_auth__["a" /* getLocalUse
         updateCustomers: function updateCustomers(state, payload) {
             state.customers = payload;
         },
-        inventoryItems: function inventoryItems(state, payload) {
-            state.inventory = payload;
-        },
+
+        // inventoryItems(state, payload) {
+        //     state.inventory = payload;
+        // },
         patientWalkin: function patientWalkin(state, payload) {
             state.walkins = payload;
         },
@@ -89768,11 +89745,13 @@ var user = Object(__WEBPACK_IMPORTED_MODULE_0__helpers_auth__["a" /* getLocalUse
                 context.commit('updateCustomers', response.data.customers);
             });
         },
-        getItems: function getItems(context) {
-            axios.get('/api/inventory').then(function (response) {
-                context.commit('inventoryItems', response.data.inventory);
-            });
-        },
+
+        // getItems(context) {
+        //     axios.get('/api/inventory')
+        //     .then((response)=> {
+        //         context.commit('inventoryItems', response.data.inventory);
+        //     })
+        // },
         getWalkin: function getWalkin(context) {
             axios.get('/api/pharmacy').then(function (response) {
                 context.commit('patientWalkin', response.data.walkins);

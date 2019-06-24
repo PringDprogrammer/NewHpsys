@@ -20,16 +20,14 @@ class CreateInventoriesTable extends Migration
             $table->date('del_date');
             $table->string('itemcode');
             $table->string('itemName');
-            $table->string('brandName');
+            $table->string('brandName')->nullable();
             $table->string('itemType');
             $table->string('consignor');
-            $table->integer('stock');
+            $table->integer('quantity');
             $table->string('unit');
-            $table->double('purchasePrice', 10, 2);
             $table->double('sellPrice', 10, 2);
             $table->double('unit_cost', 10, 2);
             $table->double('total', 10, 2);
-            $table->integer('quantity')->nullable();
             $table->timestamps();
         });
     }
